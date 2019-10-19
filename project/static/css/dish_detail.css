@@ -1,0 +1,53 @@
+#dish-detail-by-buyer-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 5%;
+}
+
+#dish-detail-by-buyer-table-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 50px;
+    margin-left: 35%;
+}
+
+#dish-detail-by-buyer-table-header-divisor {
+    width: 30%;
+    margin-left: 35%;
+    border: 1px solid #bbbbbb;
+    margin-bottom: 2%;
+}
+
+.dish-detail-by-buyer-table-markets {
+    display: flex;
+    width: 80%;
+    height: 50px;
+    margin-left: 15%;
+    margin-top: 10px;
+}
+
+.dish-detail-by-buyer-table-markets-name {
+    display: flex;
+    width: 50%;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+
+.dish-detail-by-buyer-table-markets-date {
+    display: flex;
+    width: 40%;
+    height: 50px;
+    align-items: center;
+    margin-left: 5%;
+}
+
+.dish-detail-by-buyer-table-markets-divisor {
+    display: flex;
+    width: 80%;
+    margin-left: 15%;
+    border: 1px dashed #bbbbbb;
+}

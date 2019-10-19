@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load l10n %}
+
+{% block content %}
+
+<div id="home-filter" onclick="toggleFilter()">
+    <span>Фильтры</span>
+</div>
+
+<div id="home-filter-form" style="display: none">
+    <form action="" method="get">
+        <div id="home-filter-form-buyer">
+            <label for="id_buyer">Маркет:</label>
+            <input type="text" name="buyer" id="id_buyer">
+        </div>
+        <div id="home-filter-form-day">
+            <label for="id_day">День:</label>
+            <input type="number" name="day" step="any" id="id_day">
+        </div>
+        <div id="home-filter-form-month">
+            <label for="id_month">Месяц:</label>
+            <input type="number" name="month" step="any" id="id_month">
+        </div>
+        <div id="home-filter-form-year">
+            <label for="id_year">Год:</label>
+            <input type="number" name="year" step="any" id="id_year">
+        </div>
+        <input type="submit" value="Применить" id="home-filter-form-submit-btn"/>
+    </form>
+
+<!--    <form action="" method="get">-->
+<!--        {{ filterset.form.as_p }}-->
+<!--        <input type="submit" />-->
+<!--    </form>-->
+<!--    <form method="GET">-->
+<!--        <input type="text" id="home-filters-name" placeholder="Искать по имени" name="name__icontains" id="id_name__icontains">-->
+<!--        <button type="submit" id="dashboard-filters-submit">Применить</button>-->
+<!--    </form>-->
+
+</div>
+
+<div id="home-group-table">
+    <div id="home-group-table-headers">
+        <div id="main-content-phone-headers-date">
+            <h4>Дата</h4>
+        </div>
+        <div id="home-group-table-headers-mid-divisor">
+
+        </div>
+        <div id="main-content-phone-headers-buyer">
+            <h4>Покупатель</h4>
+        </div>
+    </div>
+
+    <div id="home-group-table-headers-footer-divisor"></div>
+
+    {% for buyer in object_list %}
+    <a href="order/{{buyer.slug}}">
+        <div class="home-group-table-content">
+            <div class="home-group-table-content-date">
+                {{buyer.date}}
+            </div>
+
+            <div class="home-group-table-content-buyer">
+                {{buyer.buyer}}
+            </div>
+
+        </div>
+    </a>
+
+
+    <div id="home-group-table-content-footer-divisor"></div>
+    {% endfor %}
+</div>
+
+<script>
+    function toggleFilter() {
+        let filterBlockDisplay =  document.getElementById("home-filter-form").style.display
+        if (filterBlockDisplay == 'none') {
+            document.getElementById("home-filter-form").style.display = 'block';
+        } else {
+            document.getElementById("home-filter-form").style.display = 'none';
+        }
+    }
+</script>
+
+{% endblock content %}

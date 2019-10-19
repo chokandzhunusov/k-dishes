@@ -1,0 +1,177 @@
+#home-filter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 8%;
+  height: 50px;
+  margin-left: 80%;
+  margin-top: 5%;
+  border-radius: 10% ;
+  background-color: rgb(216, 216, 216);
+}
+
+#home-filter-form {
+  position: absolute;
+  width: 280px;
+  height: 250px;
+  left: 75%;
+  margin-top: 20px;
+  border: 1px solid #bbbbbb;
+  border-radius: 10%;
+  background-color: #FFFFFF;
+}
+
+#home-filter-form-buyer {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  margin-top: 30px;
+  /*justify-content: center;*/
+}
+
+#home-filter-form-buyer > label {
+  margin-left: 5%;
+}
+
+#home-filter-form-buyer > input {
+  margin-left: 7%;
+  border-radius: 10%;
+}
+
+#home-filter-form-day {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  /*justify-content: center;*/
+}
+
+#home-filter-form-day > label {
+  margin-left: 5%;
+}
+
+#home-filter-form-day > input {
+  margin-left: 14%;
+  width: 45px;
+  border-radius: 10%;
+}
+
+#home-filter-form-month {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  /*justify-content: center;*/
+}
+
+#home-filter-form-month > label {
+  margin-left: 5%;
+}
+
+#home-filter-form-month > input {
+  margin-left: 10%;
+  width: 45px;
+  border-radius: 10%;
+}
+
+#home-filter-form-year {
+  display: flex;
+  width: 100%;
+  height: 30px;
+  margin-top: 10px;
+  /*justify-content: center;*/
+}
+
+#home-filter-form-year > label {
+  margin-left: 5%;
+}
+
+#home-filter-form-year > input {
+  margin-left: 18%;
+  width: 65px;
+  border-radius: 10%;
+}
+
+#home-filter-form-submit-btn {
+  display: flex;
+  margin-top: 20px;
+  margin-left: 60%;
+  border: 0;
+  color: #6DDCBD;
+}
+
+#home-group-table {
+  display: flex;
+  flex-direction: column;
+  /*margin-top: 5%;*/
+  width: 100%;
+  height: 20px;
+  /*background-color: yellow;*/
+}
+
+#home-group-table-headers {
+  display: flex;
+  width: 100%;
+}
+
+#main-content-phone-headers-date {
+  display: flex;
+  width: 10%;
+  height: 20px;
+  /*background-color: red;*/
+  margin-left: 15%;
+  align-items: center;
+}
+
+#home-group-table-headers-mid-divisor {
+  width: 1px;
+  height: 25px;
+  border: 2px solid #bbbbbb;
+}
+
+#main-content-phone-headers-buyer {
+  display: flex;
+  width: 40%;
+  height: 20px;
+  /*background-color: green;*/
+  margin-left: 5%;
+  align-items: center;
+}
+
+#home-group-table-headers-footer-divisor {
+  width: 80%;
+  margin-left: 8%;
+  margin-top: 10px;
+  border: 1px solid #bbbbbb;
+}
+
+.home-group-table-content {
+  display: flex;
+  width: 100%;
+}
+
+.home-group-table-content-date {
+  display: flex;
+  width: 10%;
+  height: 20px;
+  /*background-color: red;*/
+  margin-top: 10px;
+  margin-left: 12%;
+  justify-content: center;
+}
+
+.home-group-table-content-buyer {
+  display: flex;
+  width: 40%;
+  height: 20px;
+  /*background-color: yellow;*/
+  margin-top: 10px;
+  margin-left: 8.5%;
+}
+
+#home-group-table-content-footer-divisor {
+  width: 80%;
+  margin-left: 8%;
+  margin-top: 10px;
+  border: 1px dashed #bbbbbb;
+}

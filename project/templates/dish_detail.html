@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load l10n %}
+
+{% block content %}
+<div id="dish-detail-by-buyer-table">
+    <div id="dish-detail-by-buyer-table-header">
+        <h5>{{object.name}}</h5>
+    </div>
+
+    <div id="dish-detail-by-buyer-table-header-divisor"></div>
+
+    {% for dish in dishes %}
+
+    <a href="/order/{{dish.order.slug}}">
+        <div class="dish-detail-by-buyer-table-markets">
+            <div class="dish-detail-by-buyer-table-markets-name">
+                {{dish.order.buyer}}
+            </div>
+            <div class="dish-detail-by-buyer-table-markets-date">
+                {{dish.order.date}}
+            </div>
+        </div>
+    </a>
+
+    <div class="dish-detail-by-buyer-table-markets-divisor"></div>
+
+    {% endfor %}
+</div>
+
+{% endblock content %}

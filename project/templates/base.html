@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+{% load static bootstrap%}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}K Dishes{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+
+    {% block css %}
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static 'css/base.css' %}" rel="stylesheet">
+    <link href="{% static 'css/home_1.css' %}" rel="stylesheet">
+    <link href="{% static 'css/order_detail.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dish_detail.css' %}" rel="stylesheet">
+    <link href="{% static 'css/statistics.css' %}" rel="stylesheet">
+
+    {% endblock %}
+
+</head>
+
+<body>
+    {% block header %}
+    <div id="header">
+        <div id="header-home">
+            <a href="/">
+                <button style="border-radius: 10%">
+                    Главная
+                </button>
+            </a>
+            <a href="/statistics">
+                <button style="border-radius: 10%">
+                    Статистика
+                </button>
+            </a>
+        </div>
+        <div id="header-form">
+            <form method="post" enctype="multipart/form-data" id="upload-form">
+                {% csrf_token %}
+                <div id="upload-form-choose-btn-div">
+                    <div id="upload-form-choose-btn">
+                        <label for="id_file_field">Выбрать файл</label>
+                        <input type="file" name="file_field" multiple required id="id_file_field" style="display: none">
+                    </div>
+                    <div id="upload-form-err-msg" style="display: none">
+                        <p> << </p>
+                    </div>
+                    <div id="upload-form-submit-div" onclick="validateFiles()">
+                        <button type="submit">Загрузить <span id="upload-form-files-num"></span></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+<!--
+<!--        <form method="post" enctype="multipart/form-data" id="upload-form">-->
+<!--            {% csrf_token %}-->
+<!--            <div id="upload-form-choose-btn-div">-->
+<!--                <div id="upload-form-choose-btn">-->
+<!--                    <label for="id_file_field">Выбрать файл</label>-->
+<!--                    <input type="file" name="file_field" multiple required id="id_file_field" style="display: none">-->
+<!--                </div>-->
+<!--                <div id="upload-form-err-msg" style="display: none">-->
+<!--                    <p> << </p>-->
+<!--                </div>-->
+<!--                <div id="upload-form-submit-div" onclick="validateFiles()">-->
+<!--                    <button type="submit">Загрузить <span id="upload-form-files-num"></span></button>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </form>-->
+    </div>
+    {% endblock header %}
+
+    {% block content %} {% endblock content %}
+
+
+
+
+    {% block javascript %}
+
+    <!-- Bootstrap JS and its dependencies-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <script src="{% static 'js/base.js' %}"></script>
+
+    {% endblock javascript %}
+</body>
+
+</html>

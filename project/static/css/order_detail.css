@@ -1,0 +1,282 @@
+#order-detail-filter-form {
+    position: absolute;
+    width: 280px;
+    height: 250px;
+    left: 78%;
+    margin-top: 8%;
+    border: 1px solid #bbbbbb;
+    border-radius: 10%;
+    background-color: #FFFFFF;
+}
+
+#order-detail-filter-form-code {
+    display: flex;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+#order-detail-filter-form-code > input {
+    display: flex;
+    margin-left: 20%;
+    border-radius: 10%;
+}
+
+#order-detail-filter-form-bar-code {
+    display: flex;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+#order-detail-filter-form-bar-code > input {
+    display: flex;
+    margin-left: 2%;
+    border-radius: 10%;
+}
+
+#order-detail-filter-form-quantity {
+    display: flex;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+#order-detail-filter-form-quantity > input {
+    display: flex;
+    margin-left: 15%;
+    border-radius: 10%;
+}
+
+#order-detail-filter-form-name {
+    display: flex;
+    margin-top: 5%;
+    margin-left: 5%;
+}
+
+#order-detail-filter-form-name > input {
+    border-radius: 10%;
+}
+
+#order-detail-filter-form-submit-btn {
+    display: flex;
+    margin-top: 5%;
+    margin-left: 55%;
+    border-radius: 10%;
+}
+
+#order-detail-table {
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+    width: 100%;
+    /*height: 20px;*/
+    /*background-color: yellow;*/
+}
+
+#order-detail-table-header {
+    display: flex;
+    width: 100%;
+}
+
+#order-detail-table-buyer-name {
+    display: flex;
+    justify-content: center;
+    width: 20%;
+    margin-left: 40%;
+    height: 40px;
+}
+
+#order-detail-table-filter-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 8%;
+    margin-left: 25%;
+    height: 40px;
+    border-radius: 10% ;
+    background-color: rgb(216, 216, 216);
+}
+
+#order-detail-table-buyer-name-divisor {
+    width: 20%;
+    margin-left: 40%;
+    border: 1px solid  #bbbbbb;
+}
+
+#order-detail-table-dish-header {
+    display: flex;
+    width: 90%;
+    margin-top: 5%;
+    margin-left: 4%;
+    height: 40px;
+    background-color: #FFB14B;
+}
+
+#order-detail-table-dish-header-number {
+    display: flex;
+    width: 5%;
+    align-items: center;
+    /*background-color: floralwhite;*/
+}
+
+#order-detail-table-dish-header-code {
+    display: flex;
+    width: 8%;
+    align-items: center;
+    /*background-color: blueviolet;*/
+}
+
+#order-detail-table-dish-header-bar-code {
+    display: flex;
+    width: 14%;
+    align-items: center;
+    /*background-color: coral;*/
+}
+
+#order-detail-table-dish-header-name {
+    display: flex;
+    width: 40%;
+    align-items: center;
+    /*background-color: green;*/
+}
+
+#order-detail-table-dish-header-unit {
+    display: flex;
+    width: 5%;
+    align-items: center;
+    /*background-color: grey;*/
+}
+
+#order-detail-table-dish-header-rest {
+    display: flex;
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: darkmagenta;*/
+}
+
+#order-detail-table-dish-header-rest > span {
+    text-align: center;
+}
+
+#order-detail-table-dish-header-quantity {
+    display: flex;
+    width: 5%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: teal;*/
+}
+
+#order-detail-table-dish-header-return-by-defect {
+    display: flex;
+    width: 8%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: blue;*/
+}
+
+#order-detail-table-dish-header-return-by-defect > span {
+    text-align: center;
+}
+
+#order-detail-table-dish-header-exchange-by-defect{
+    display: flex;
+    width: 5%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: indigo;*/
+}
+
+#order-detail-table-dish-header-exchange-by-defect > span {
+    text-align: center;
+}
+
+#order-detail-table-dish-header-divisor {
+    width: 90%;
+    margin-left: 4%;
+    justify-content: center;
+    border: 1px solid  #bbbbbb;
+}
+
+.order-detail-table-dish {
+    display: flex;
+    width: 90%;
+    margin-top: 10px;
+    margin-left: 4%;
+    height: 40px;
+    /*background-color: brown;*/
+}
+
+.order-detail-table-dish-number {
+    display: flex;
+    width: 5%;
+    align-items: center;
+    /*background-color: floralwhite;*/
+
+}
+
+.order-detail-table-dish-code {
+    display: flex;
+    width: 8%;
+    align-items: center;
+    /*background-color: blueviolet;*/
+}
+
+.order-detail-table-dish-bar-code {
+    display: flex;
+    width: 14%;
+    align-items: center;
+    /*background-color: coral;*/
+}
+
+.order-detail-table-dish-name {
+    display: flex;
+    width: 40%;
+    align-items: center;
+    /*background-color: green;*/
+}
+
+.order-detail-table-dish-unit {
+    display: flex;
+    justify-content: center;
+    width: 7%;
+    align-items: center;
+    /*background-color: grey;*/
+}
+
+.order-detail-table-dish-rest {
+    display: flex;
+    width: 8%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: darkmagenta;*/
+}
+
+.order-detail-table-dish-quantity {
+    display: flex;
+    width: 7%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: teal;*/
+
+}
+
+.order-detail-table-dish-return-by-defect {
+    display: flex;
+    width: 6%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: blue;*/
+}
+
+.order-detail-table-dish-exchange-by-defect {
+    display: flex;
+    width: 5%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: indigo;*/
+}
+
+.order-detail-table-dish-divisor {
+    width: 90%;
+    margin-left: 4%;
+    border: 1px dashed  #bbbbbb;
+}
