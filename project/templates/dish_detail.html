@@ -2,9 +2,27 @@
 {% load l10n %}
 
 {% block content %}
+
+<a href="/dish/{{object.pk}}/edit">
+    <button id="dish-edit-btn">Редактировать</button>
+</a>
+
 <div id="dish-detail-by-buyer-table">
-    <div id="dish-detail-by-buyer-table-header">
-        <h5>{{object.name}}</h5>
+    <div id="dish-detail-table-buyer-name">
+        <span id="dish-detail-table-buyer-name-1"><b>Наименование: </b></span>
+        <span id="dish-detail-table-buyer-name-2">{{object.name}}</span>
+    </div>
+    <div class="dish-detail-table-items">
+        <span class="dish-detail-table-items-1"><b>Цена (покупочная): </b></span>
+        <span class="dish-detail-table-items-2">{{object.price_1}} c.</span>
+    </div>
+    <div class="dish-detail-table-items">
+        <span class="dish-detail-table-items-1"><b>Цена (продажная): </b></span>
+        <span class="dish-detail-table-items-2">{{object.price_2}} c.</span>
+    </div>
+    <div class="dish-detail-table-items">
+        <span class="dish-detail-table-items-1"><b>Общеее количество по маркетам: </b></span>
+        <span class="dish-detail-table-items-2">{{total_amount_of_dish}} шт.</span>
     </div>
 
     <div id="dish-detail-by-buyer-table-header-divisor"></div>
@@ -18,6 +36,9 @@
             </div>
             <div class="dish-detail-by-buyer-table-markets-date">
                 {{dish.order.date}}
+            </div>
+            <div class="dish-detail-by-buyer-table-markets-date">
+                {{dish.quantity}} шт.
             </div>
         </div>
     </a>

@@ -21,7 +21,6 @@ ROOT_DIR = (
 
 APPS_DIR = ROOT_DIR.path("dishes")
 
-print(ROOT_DIR, APPS_DIR)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -135,8 +134,6 @@ STATIC_ROOT = str(ROOT_DIR("staticfiles"))
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
-
-print(STATICFILES_DIRS)
 
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",

@@ -1,0 +1,32 @@
+<form id="form_" method="post" enctype="multipart/form-data">{% csrf_token %}
+    {% for name in names %}
+        <tr>
+            <th>
+                <label for="id_buyer">{{name}}:</label>
+            </th>
+            <td>
+                <input type="text" name="buyer" maxlength="255" required id="id_buyer">
+            </td>
+        <tr>
+    {% endfor %}
+    <button type="submit">Загрузить</button>
+</form>
+
+
+
+<script>
+    inputs = document.forms["form_"].getElementsByTagName("input");
+    for (i = 1; i < inputs.length; i++) {
+        inputs[i].name = inputs[i].name + '_' + i;
+    }
+    console.log(inputs)
+</script>
+
+<!-- <tr>
+    <th>
+        <label for="id_buyer">Buyer:</label>
+    </th>
+    <td>
+        <input type="text" name="buyer" maxlength="255" required id="id_buyer">
+    </td>
+</tr> -->

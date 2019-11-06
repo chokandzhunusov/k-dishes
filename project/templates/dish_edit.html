@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load l10n %}
+
+{% block content %}
+<div style="margin-left: 44%; margin-top: 5%">
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Обновить">
+    </form>
+</div>
+
+{% endblock%}

@@ -1,0 +1,16 @@
+#id_bar_code {
+    margin-left: 10%;
+}
+
+#id_name {
+    margin-left: 6%;
+    width: 30%;
+}
+
+#id_quantity {
+    margin-left: 13.5%;
+}
+
+#id_price_1, #id_price_2 {
+    margin-left: 2.5%;
+}

@@ -1,3 +1,9 @@
+#dish-edit-btn {
+    position: absolute;
+    top: 15%;
+    left: 85%;
+}
+
 #dish-detail-by-buyer-table {
     display: flex;
     flex-direction: column;
@@ -15,10 +21,11 @@
 }
 
 #dish-detail-by-buyer-table-header-divisor {
-    width: 30%;
-    margin-left: 35%;
+    width: 40%;
+    margin-left: 29%;
     border: 1px solid #bbbbbb;
     margin-bottom: 2%;
+    margin-top: 15px;
 }
 
 .dish-detail-by-buyer-table-markets {
@@ -50,4 +57,36 @@
     width: 80%;
     margin-left: 15%;
     border: 1px dashed #bbbbbb;
+}
+
+#dish-detail-table-buyer-name {
+    display: flex;
+    justify-content: center;
+}
+
+#dish-detail-table-buyer-name-1 {
+    display: flex;
+    width: 30%;
+    margin-left: 10%;
+}
+
+#dish-detail-table-buyer-name-2 {
+    display: flex;
+    width: 20%;
+}
+
+.dish-detail-table-items {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.dish-detail-table-items-1 {
+    display: flex;
+    width: 30%;
+}
+
+.dish-detail-table-items-2 {
+    display: flex;
+    width: 10%;
 }

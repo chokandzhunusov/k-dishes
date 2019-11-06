@@ -3,36 +3,59 @@
 
 {% block content %}
 
-<div id="order-detail-filter-form" style="display: none">
-        <form action="" method="get">
-            <div id="order-detail-filter-form-code">
-                <label for="id_code">Код:</label>
-                <input type="number" name="code" step="any" id="id_code">
-            </div>
-            <div id="order-detail-filter-form-bar-code">
-                <label for="id_bar_code">Штрихкод:</label>
-                <input type="number" name="bar_code" step="any" id="id_bar_code">
-            </div>
-            <div id="order-detail-filter-form-quantity">
-                <label for="id_quantity">Заказ:</label>
-                <input type="number" name="quantity" step="any" id="id_quantity">
-            </div>
-            <div id="order-detail-filter-form-name">
-                <label for="id_name">Продукция:</label>
-                <input type="text" name="name" id="id_name">
-            </div>
-            <input type="submit" value="Применить" id="order-detail-filter-form-submit-btn"/>
-        </form>
-</div>
+<!--<div id="order-detail-filter-form" style="display: none">-->
+<!--        <form action="" method="get">-->
+<!--            <div id="order-detail-filter-form-code">-->
+<!--                <label for="id_code">Код:</label>-->
+<!--                <input type="number" name="code" step="any" id="id_code">-->
+<!--            </div>-->
+<!--            <div id="order-detail-filter-form-bar-code">-->
+<!--                <label for="id_bar_code">Штрихкод:</label>-->
+<!--                <input type="number" name="bar_code" step="any" id="id_bar_code">-->
+<!--            </div>-->
+<!--            <div id="order-detail-filter-form-quantity">-->
+<!--                <label for="id_quantity">Заказ:</label>-->
+<!--                <input type="number" name="quantity" step="any" id="id_quantity">-->
+<!--            </div>-->
+<!--            <div id="order-detail-filter-form-name">-->
+<!--                <label for="id_name">Продукция:</label>-->
+<!--                <input type="text" name="name" id="id_name">-->
+<!--            </div>-->
+<!--            <input type="submit" value="Применить" id="order-detail-filter-form-submit-btn"/>-->
+<!--        </form>-->
+<!--</div>-->
 
 <div id="order-detail-table">
     <div id="order-detail-table-header">
-        <div id="order-detail-table-buyer-name">
-            <h3>{{object.buyer}}</h3>
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Маркет: </b></span>
+            <span class="order-detail-table-items-2">{{object.buyer}}</span>
         </div>
-        <div id="order-detail-table-filter-btn" onclick="toggleFilter()">
-            <span>Фильтры</span>
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Дата: </b></span>
+            <span class="order-detail-table-items-2">{{object.date}}</span>
         </div>
+
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Сумма: </b></span>
+            <span class="order-detail-table-items-2">{{totall_price_2}} c.</span>
+        </div>
+
+         <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Кол-во элементов: </b></span>
+            <span class="order-detail-table-items-2">{{filterset.qs | length}} шт.</span>
+        </div>
+
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Кол-во продукции: </b></span>
+            <span class="order-detail-table-items-2">{{totall_dishes}} шт.</span>
+        </div>
+<!--        <div id="order-detail-table-buyer-name">-->
+<!--            <h3>{{object.buyer}}</h3>-->
+<!--        </div>-->
+<!--        <div id="order-detail-table-filter-btn" onclick="toggleFilter()">-->
+<!--            <span>Фильтры</span>-->
+<!--        </div>-->
     </div>
 
     <div id="order-detail-table-buyer-name-divisor"></div>
@@ -41,43 +64,31 @@
         <div id="order-detail-table-dish-header-number">
             <span>№</span>
         </div>
-        <div id="order-detail-table-dish-header-code">
-            <span>Код</span>
-        </div>
+<!--        <div id="order-detail-table-dish-header-code">-->
+<!--            <span>Код</span>-->
+<!--        </div>-->
         <div id="order-detail-table-dish-header-bar-code">
             <span>Штрихкод</span>
         </div>
         <div id="order-detail-table-dish-header-name">
             <span>Продукция</span>
         </div>
-        <div id="order-detail-table-dish-header-unit">
-            <span>Ед. изм.</span>
-        </div>
-        <div id="order-detail-table-dish-header-rest">
-            <span>Ост. на день заказа</span>
-        </div>
         <div id="order-detail-table-dish-header-quantity">
             <span>Заказ</span>
         </div>
-        <div id="order-detail-table-dish-header-return-by-defect">
-            <span>Возврат брака</span>
-        </div>
-        <div id="order-detail-table-dish-header-exchange-by-defect">
-            <span>Обмен брака</span>
+        <div id="order-detail-table-dish-header-price_2">
+            <span>Цена (продажная)</span>
         </div>
     </div>
 
     <div id="order-detail-table-dish-header-divisor"></div>
 
-    {% for dish in  object_list %}
+    {% for dish in  filterset.qs %}
 
     <a href="/dish/{{dish.pk}}">
         <div class="order-detail-table-dish">
         <div class="order-detail-table-dish-number">
             <span>{{dish.number}}</span>
-        </div>
-        <div class="order-detail-table-dish-code">
-            <span>{{dish.code}}</span>
         </div>
         <div class="order-detail-table-dish-bar-code">
             <span>{{dish.bar_code}}</span>
@@ -85,20 +96,11 @@
         <div class="order-detail-table-dish-name">
             <span>{{dish.name}}</span>
         </div>
-        <div class="order-detail-table-dish-unit">
-            <span>{{dish.unit}}</span>
-        </div>
-        <div class="order-detail-table-dish-rest">
-            <span>{{dish.rest}}</span>
-        </div>
         <div class="order-detail-table-dish-quantity">
             <span>{{dish.quantity}}</span>
         </div>
-        <div class="order-detail-table-dish-return-by-defect">
-            <span>{{dish.return_by_defect}}</span>
-        </div>
-        <div class="order-detail-table-dish-exchange-by-defect">
-            <span>{{dish.exchange_by_defect}}</span>
+        <div class="order-detail-table-dish-price_2">
+            <span>{{dish.price_2}} c.</span>
         </div>
     </div>
     </a>

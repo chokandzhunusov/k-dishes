@@ -25,7 +25,10 @@
     <link href="{% static 'css/home_1.css' %}" rel="stylesheet">
     <link href="{% static 'css/order_detail.css' %}" rel="stylesheet">
     <link href="{% static 'css/dish_detail.css' %}" rel="stylesheet">
+    <link href="{% static 'css/dish_edit.css' %}" rel="stylesheet">
     <link href="{% static 'css/statistics.css' %}" rel="stylesheet">
+    <link href="{% static 'css/add_filename.css' %}" rel="stylesheet">
+
 
     {% endblock %}
 
@@ -52,7 +55,8 @@
                 <div id="upload-form-choose-btn-div">
                     <div id="upload-form-choose-btn">
                         <label for="id_file_field">Выбрать файл</label>
-                        <input type="file" name="file_field" multiple required id="id_file_field" style="display: none">
+                        <input type="file" name="file_field" required id="id_file_field" style="display: none">
+                        <!-- <input type="file" name="file_field" multiple required id="id_file_field" style="display: none"> -->
                     </div>
                     <div id="upload-form-err-msg" style="display: none">
                         <p> << </p>
@@ -63,7 +67,7 @@
                 </div>
             </form>
         </div>
-<!--
+
 <!--        <form method="post" enctype="multipart/form-data" id="upload-form">-->
 <!--            {% csrf_token %}-->
 <!--            <div id="upload-form-choose-btn-div">-->

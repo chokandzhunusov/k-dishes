@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# from dishes.views import CustomFileUpload
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", include("dishes.urls"), name="dishes")
+    # path('custom_file_upload/', view=CustomFileUpload.as_view(), name="custom_file_upload"),
+    path("", include("dishes.urls"), name="dishes"),
+
 ]

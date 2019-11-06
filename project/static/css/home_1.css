@@ -103,7 +103,7 @@
 #home-group-table {
   display: flex;
   flex-direction: column;
-  /*margin-top: 5%;*/
+  margin-top: 5%;
   width: 100%;
   height: 20px;
   /*background-color: yellow;*/
@@ -131,7 +131,16 @@
 
 #main-content-phone-headers-buyer {
   display: flex;
-  width: 40%;
+  width: 18%;
+  height: 20px;
+  /*background-color: green;*/
+  margin-left: 5%;
+  align-items: center;
+}
+
+.main-content-phone-headers-items {
+  display: flex;
+  width: 18%;
   height: 20px;
   /*background-color: green;*/
   margin-left: 5%;
@@ -160,13 +169,22 @@
   justify-content: center;
 }
 
-.home-group-table-content-buyer {
+.home-group-table-content-items {
   display: flex;
-  width: 40%;
+  width: 15%;
   height: 20px;
   /*background-color: yellow;*/
   margin-top: 10px;
   margin-left: 8.5%;
+}
+
+.home-group-table-content-items-aligned {
+  display: flex;
+  width: 15%;
+  height: 20px;
+  /*background-color: yellow;*/
+  margin-top: 10px;
+  margin-left: 11%;
 }
 
 #home-group-table-content-footer-divisor {

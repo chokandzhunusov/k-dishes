@@ -166,4 +166,5 @@ pip-selfcheck.json
 ### Project template
 
 .pytest_cache/
-
+*.DS_Store
+/files

@@ -4,8 +4,6 @@ from django.db import models
 from django.utils.text import slugify
 
 
-
-
 class Order(models.Model):
     date = models.DateField()
     buyer = models.CharField(max_length=255)
@@ -16,11 +14,10 @@ class Order(models.Model):
         ordering = ['-created']
 
     def save(self, *args, **kwargs):
-        slug_name = str(self.buyer) + '-' + str(self.date) + '-' + str(datetime.datetime.now().second)
+        slug_name = str(self.buyer) + '-' + str(self.date) + \
+            '-' + str(datetime.datetime.now().microsecond)
         self.slug = slugify('market ' + slug_name)  # allow_unicode=True
         super(Order, self).save(*args, **kwargs)
-
-
 
     def __str__(self):
         return self.buyer
@@ -37,9 +34,14 @@ class Dish(models.Model):
     quantity = models.IntegerField()
     return_by_defect = models.IntegerField()
     exchange_by_defect = models.IntegerField()
+    price_1 = models.IntegerField(default=0)
+    price_2 = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
+
+    class Meta:
+        ordering = ['number']
 
 
 class UniqueDish(models.Model):
@@ -52,6 +54,8 @@ class UniqueDish(models.Model):
     quantity = models.IntegerField()
     return_by_defect = models.IntegerField()
     exchange_by_defect = models.IntegerField()
+    price_1 = models.IntegerField(default=0)
+    price_2 = models.IntegerField(default=0)
 
     class Meta:
         ordering = ['pk']
