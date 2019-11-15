@@ -1,15 +1,13 @@
 from datetime import datetime
-from dateutil.parser import parse
 import datefinder
-import json
 from django.urls import reverse
-from django.shortcuts import redirect, render, HttpResponseRedirect
-from django.http import HttpResponse
+from django.shortcuts import redirect, render
+
 import django.views.generic as views
 from django.http import QueryDict
 
 from .models import Market, Order, Dish, UniqueDish
-from .forms import UploadFileForm, DishEditForm, FilterForm
+from .forms import UploadFileForm, DishEditForm
 from .filters import MarketFilterSet, MarketDetailFilterSet, StatisticsFilterSet
 
 
@@ -58,7 +56,7 @@ class BaseView(views.View):
                     self.order = Order.objects.create(
                         market=self.market,
                         date=self.date)
-            except:
+            except Exception as e:
                 return render(request, 'upload_file.html')
 
         for file in files:

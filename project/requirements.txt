@@ -1,3 +1,4 @@
+datefinder==0.7.0
 Django==2.2.6
 django-bootstrap-form==3.4
 django-environ==0.4.5
@@ -12,7 +13,10 @@ lml==0.0.9
 mccabe==0.6.1
 openpyxl==2.5.14
 pep8==1.7.1
-psycopg2>=2.7,<3.0
+Pillow==5.4.1
+protobuf==3.10.0
+psycopg2==2.8.3
+psycopg2-binary==2.8.3
 pycodestyle==2.5.0
 pyexcel==0.5.15
 pyexcel-io==0.5.20
