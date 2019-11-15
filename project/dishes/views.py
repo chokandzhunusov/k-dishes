@@ -45,7 +45,8 @@ class BaseView(views.View):
                                 market_name = row_item[slice(start_index, len(row_item))]
                                 market_num = [int(s) for s in market_name.split() if s.isdigit()][0]
 
-                                self.market = Market.objects.get(name__icontains=market_num)
+                                self.market = Market.objects.get(
+                                    name__exact=f'Гипермаркет {market_num}')
 
                             # Extract date
                             if 'Заказ поставщику' in str(row_item):
