@@ -1,4 +1,9 @@
-document.getElementById("id_file_field").addEventListener('change', f);
+try {
+    document.getElementById("id_file_field").addEventListener('change', f);
+} catch {
+    console.log('Not file upload dir')
+}
+
 
 function f() {
     numOfFiles = document.getElementById("id_file_field").files.length
@@ -8,10 +13,9 @@ function f() {
 function validateFiles() {
     numOfFiles = document.getElementById("id_file_field").files.length
     if (!numOfFiles) {
-        document.getElementById('upload-form-err-msg').style.display = 'block'
 
         let interval = setInterval(function () {
-            $("#upload-form-err-msg").css("background-color", function () {
+            $("#upload-form-choose-btn").css("background-color", function () {
                 this.switch = !this.switch
                 return this.switch ? "red" : ""
             });
@@ -19,10 +23,8 @@ function validateFiles() {
 
 
         setTimeout(function(){
-            document.getElementById('upload-form-err-msg').style.display = 'none'
             clearInterval(interval)
         }, 3000);
 
     }
 }
-

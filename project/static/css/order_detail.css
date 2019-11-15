@@ -76,88 +76,7 @@
     justify-content: center;
     flex-direction: column;
     width: 100%;
-
 }
-
-/*#order-detail-table-buyer-name {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-
-/*}*/
-
-/*#order-detail-table-buyer-name-1 {*/
-/*    display: flex;*/
-/*    width: 20%;*/
-/*}*/
-
-/*#order-detail-table-buyer-name-2 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
-
-/*#order-detail-table-buyer-date {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    margin-top: 20px;*/
-/*}*/
-
-/*#order-detail-table-buyer-date-1 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
-
-/*#order-detail-table-buyer-date-2 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
-
-/*#order-detail-table-buyer-price_2 {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    margin-top: 20px;*/
-/*}*/
-
-/*#order-detail-table-buyer-price_2-1 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
-
-/*#order-detail-table-buyer-price_2-2 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
-
-/*#order-detail-table-buyer-totall-dishes-amount {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    margin-top: 20px;*/
-/*}*/
-
-/*#order-detail-table-buyer-totall-dishes-amount-1 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
-
-/*#order-detail-table-buyer-totall-dishes-amount-2 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
-
-/*#order-detail-table-buyer-totall-dishes {*/
-/*   display: flex;*/
-/*    justify-content: center;*/
-/*    margin-top: 20px;*/
-/*}*/
-
-/*#order-detail-table-buyer-totall-dishes-1 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
-
-/*#order-detail-table-buyer-totall-dishes-2 {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*}*/
 
 .order-detail-table-items {
     display: flex;
@@ -175,24 +94,16 @@
     width: 10%;
 }
 
-/*#order-detail-table-buyer-name {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    width: 20%;*/
-/*    margin-left: 40%;*/
-/*    height: 40px;*/
-/*}*/
+#delete-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+    background-color: rgb(216, 216, 216);
+}
 
-/*#order-detail-table-filter-btn {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    width: 8%;*/
-/*    margin-left: 25%;*/
-/*    height: 40px;*/
-/*    border-radius: 10% ;*/
-/*    background-color: rgb(216, 216, 216);*/
-/*}*/
 
 #order-detail-table-buyer-name-divisor {
     width: 30%;
@@ -218,13 +129,6 @@
     /*background-color: floralwhite;*/
 }
 
-/*#order-detail-table-dish-header-code {*/
-/*    display: flex;*/
-/*    width: 8%;*/
-/*    align-items: center;*/
-/*    !*background-color: blueviolet;*!*/
-/*}*/
-
 #order-detail-table-dish-header-bar-code {
     display: flex;
     width: 14%;
@@ -238,25 +142,6 @@
     align-items: center;
     /*background-color: green;*/
 }
-
-/*#order-detail-table-dish-header-unit {*/
-/*    display: flex;*/
-/*    width: 5%;*/
-/*    align-items: center;*/
-/*    !*background-color: grey;*!*/
-/*}*/
-
-/*#order-detail-table-dish-header-rest {*/
-/*    display: flex;*/
-/*    width: 10%;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    !*background-color: darkmagenta;*!*/
-/*}*/
-
-/*#order-detail-table-dish-header-rest > span {*/
-/*    text-align: center;*/
-/*}*/
 
 #order-detail-table-dish-header-quantity {
     display: flex;
@@ -277,18 +162,6 @@
 #order-detail-table-dish-header-price_2 > span {
     text-align: center;
 }
-
-/*#order-detail-table-dish-header-exchange-by-defect{*/
-/*    display: flex;*/
-/*    width: 5%;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    !*background-color: indigo;*!*/
-/*}*/
-
-/*#order-detail-table-dish-header-exchange-by-defect > span {*/
-/*    text-align: center;*/
-/*}*/
 
 #order-detail-table-dish-header-divisor {
     width: 90%;
@@ -315,13 +188,6 @@
 
 }
 
-/*.order-detail-table-dish-code {*/
-/*    display: flex;*/
-/*    width: 8%;*/
-/*    align-items: center;*/
-/*    !*background-color: blueviolet;*!*/
-/*}*/
-
 .order-detail-table-dish-bar-code {
     display: flex;
     width: 14%;
@@ -335,22 +201,6 @@
     align-items: center;
     /*background-color: green;*/
 }
-
-/*.order-detail-table-dish-unit {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    width: 7%;*/
-/*    align-items: center;*/
-/*    !*background-color: grey;*!*/
-/*}*/
-
-/*.order-detail-table-dish-rest {*/
-/*    display: flex;*/
-/*    width: 8%;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    !*background-color: darkmagenta;*!*/
-/*}*/
 
 .order-detail-table-dish-quantity {
     display: flex;
@@ -368,14 +218,6 @@
     justify-content: center;
     /*background-color: blue;*/
 }
-
-/*.order-detail-table-dish-exchange-by-defect {*/
-/*    display: flex;*/
-/*    width: 5%;*/
-/*    align-items: center;*/
-/*    justify-content: center;*/
-/*    !*background-color: indigo;*!*/
-/*}*/
 
 .order-detail-table-dish-divisor {
     width: 90%;

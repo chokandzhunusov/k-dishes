@@ -1,32 +1,27 @@
-{% extends "base.html" %}
+<!-- {% extends "base.html" %}
 {% load l10n %}
 
 {% block content %}
+<!-- <div id="filters">
+    <form method="get">
+        <div id="filters-form">
+            <div id="days">
+                {{filterset.form.day}}
+            </div>
+            <div id="months">
+                {{filterset.form.month}}
+            </div>
+            <div id="years">
+                {{filterset.form.year}}
+            </div>
+        </div>
 
-<!--<div id="order-detail-filter-form" style="display: none">-->
-<!--        <form action="" method="get">-->
-<!--            <div id="order-detail-filter-form-code">-->
-<!--                <label for="id_code">Код:</label>-->
-<!--                <input type="number" name="code" step="any" id="id_code">-->
-<!--            </div>-->
-<!--            <div id="order-detail-filter-form-bar-code">-->
-<!--                <label for="id_bar_code">Штрихкод:</label>-->
-<!--                <input type="number" name="bar_code" step="any" id="id_bar_code">-->
-<!--            </div>-->
-<!--            <div id="order-detail-filter-form-quantity">-->
-<!--                <label for="id_quantity">Заказ:</label>-->
-<!--                <input type="number" name="quantity" step="any" id="id_quantity">-->
-<!--            </div>-->
-<!--            <div id="order-detail-filter-form-name">-->
-<!--                <label for="id_name">Продукция:</label>-->
-<!--                <input type="text" name="name" id="id_name">-->
-<!--            </div>-->
-<!--            <input type="submit" value="Применить" id="order-detail-filter-form-submit-btn"/>-->
-<!--        </form>-->
-<!--</div>-->
+        <button type="submit">Применить</button>
+    </form>
+</div> -->
 
 
-<div id="order-detail-table">
+<div id="statistics-table">
     <div id="order-detail-table-header">
          <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Кол-во элементов: </b></span>
@@ -34,23 +29,41 @@
         </div>
         <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Кол-во продукции: </b></span>
-            <span class="order-detail-table-items-2">{{totall_dishes}} шт.</span>
+            <span class="order-detail-table-items-2">{{total_amount_of_dish}} шт.</span>
         </div>
         <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Сумма (общая по продажной цене): </b></span>
-            <span class="order-detail-table-items-2">{{totall_price_2}} c.</span>
+            <span class="order-detail-table-items-2">{{total_dish_price_2}} c.</span>
         </div>
     </div>
-<!--    <div id="order-detail-table-header">-->
-<!--        <div id="order-detail-table-buyer-name">-->
-<!--            <h3>Cтатистика</h3>-->
-<!--        </div>-->
-<!--        <div id="order-detail-table-filter-btn" onclick="toggleFilter()">-->
-<!--            <span>Фильтры</span>-->
-<!--        </div>-->
-<!--    </div>-->
+   <!-- <div id="order-detail-table-header">
+       <div id="order-detail-table-buyer-name">
+           <h3>Cтатистика</h3>
+       </div>
+       <div id="order-detail-table-filter-btn" onclick="toggleFilter()">
+           <span>Фильтры</span>
+       </div>
+   </div> -->
 
     <div id="order-detail-table-buyer-name-divisor"></div>
+
+    <div id="filters">
+        <form method="get">
+            <div id="filters-form">
+                <div id="days">
+                    {{filterset.form.day}}
+                </div>
+                <div id="months">
+                    {{filterset.form.month}}
+                </div>
+                <div id="years">
+                    {{filterset.form.year}}
+                </div>
+            </div>
+
+            <button type="submit">Применить</button>
+        </form>
+    </div>
 
     <div id="order-detail-table-dish-header">
         <div id="order-detail-table-dish-header-number">
@@ -68,32 +81,40 @@
         <div id="order-detail-table-dish-header-price_2">
             <span>Цена (продажная)</span>
         </div>
+        <div id="order-detail-table-dish-header-price_2">
+            <span>Цена (продажная) общая</span>
+        </div>
     </div>
 
     <div id="order-detail-table-dish-header-divisor"></div>
 
-    {% for dish in  filterset.qs %}
-    <a href="/dish/{{dish.pk_in_dish_list}}">
-        <div class="order-detail-table-dish">
-        <div class="order-detail-table-dish-number">
-            <span>{{dish.pk}}</span>
-        </div>
-        <div class="order-detail-table-dish-bar-code">
-            <span>{{dish.bar_code}}</span>
-        </div>
-        <div class="order-detail-table-dish-name">
-            <span>{{dish.name}}</span>
-        </div>
-        <div class="order-detail-table-dish-quantity">
-            <span>{{dish.quantity}}</span>
-        </div>
-        <div class="order-detail-table-dish-price_2">
-            <span>{{dish.price_2}} c.</span>
-        </div>
-    </div>
-    </a>
-
-    <div class="order-detail-table-dish-divisor"></div>
+    {% for dish in filtered_qs %}
+        <!-- {% if dish.quantity != 0 %} -->
+            <a href="/statistics/{{dish.pk}}">
+            <!-- <a href="/statistics/{{dish.pk_in_dish_list}}"> -->
+                <div class="order-detail-table-dish">
+                <div class="order-detail-table-dish-number">
+                    <span>{{dish.pk}}</span>
+                </div>
+                <div class="order-detail-table-dish-bar-code">
+                    <span>{{dish.bar_code}}</span>
+                </div>
+                <div class="order-detail-table-dish-name">
+                    <span>{{dish.name}}</span>
+                </div>
+                <div class="order-detail-table-dish-quantity">
+                    <span>{{dish.quantity}}</span>
+                </div>
+                <div class="order-detail-table-dish-price_2">
+                    <span>{{dish.price_2}} c.</span>
+                </div>
+                <div class="order-detail-table-dish-price_2">
+                    <span>{{dish.price_2_total}} c.</span>
+                </div>
+            </div>
+            </a>
+            <div class="order-detail-table-dish-divisor"></div>
+        <!-- {% endif %} -->
     {% endfor %}
 </div>
 
@@ -108,4 +129,4 @@
     }
 </script>
 
-{% endblock content %}
+{% endblock content %} -->

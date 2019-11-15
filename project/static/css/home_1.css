@@ -1,3 +1,13 @@
+#err_msg {
+    position: absolute;
+    left: 40%;
+    width: 400px;
+    line-height: 50px;
+    top: 10px;
+    background-color: #DC143C;
+    text-align: center;
+}
+
 #home-filter {
   display: flex;
   justify-content: center;

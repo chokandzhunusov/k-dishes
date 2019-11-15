@@ -1,13 +1,30 @@
-import datetime
-
 from django import forms
 
 from .models import Dish, Order
 
 
 class UploadFileForm(forms.Form):
-    file_field = forms.FileField()
-    # file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    MARKETS = (
+        ('', '-------------'),
+        ('Гипермаркет 1', 'Гипермаркет 1'),
+        ('Гипермаркет 2', 'Гипермаркет 2'),
+        ('Гипермаркет 3', 'Гипермаркет 3'),
+        ('Гипермаркет 4', 'Гипермаркет 4'),
+        ('Гипермаркет 5', 'Гипермаркет 5'),
+        ('Гипермаркет 6', 'Гипермаркет 6'),
+        ('Гипермаркет 7', 'Гипермаркет 7'),
+        ('Гипермаркет 8', 'Гипермаркет 8'),
+        ('Гипермаркет 9', 'Гипермаркет 9'),
+        ('Гипермаркет 10', 'Гипермаркет 10'),
+        ('Гипермаркет 11', 'Гипермаркет 11'),
+    )
+
+    market = forms.ChoiceField(choices=MARKETS,
+                               required=True,
+                               label='Гипермаркет')
+    date = forms.DateField(widget=forms.SelectDateWidget(),
+                           label='Дата')
+    file_field = forms.FileField(label='Файл')
 
 
 class DishEditForm(forms.ModelForm):
@@ -21,5 +38,14 @@ class DishEditForm(forms.ModelForm):
                   'price_2': 'Цена (продажная)'}
 
 
-class CommitFileUploadForm(forms.Form):
-    buyer = forms.CharField(max_length=255)
+class FilterForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = ['date']
+
+    # DAYS = (
+    #     ('', '----------------'),
+    #     ('1', 'Январь'),
+    #     ('2', 'Февраль'),
+    # )
+    # days = forms.ChoiceField(choices=DAYS)

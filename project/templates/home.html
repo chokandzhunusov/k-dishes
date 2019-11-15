@@ -1,34 +1,26 @@
 {% extends "base.html" %}
 {% load l10n %}
 
+{% block form %}
+<form method="post" enctype="multipart/form-data" id="upload-form">
+    {% csrf_token %}
+    <div id="upload-form-choose-btn-div">
+        <div id="upload-form-choose-btn">
+            <label for="id_file_field">Выбрать файл</label>
+            <input type="file" name="file_field" required id="id_file_field" style="display: none">
+            <!-- <input type="file" name="file_field" multiple required id="id_file_field" style="display: none"> -->
+        </div>
+        <div id="upload-form-err-msg" style="display: none">
+            <p> << </p>
+        </div>
+        <div id="upload-form-submit-div" onclick="validateFiles()">
+            <button type="submit">Загрузить <span id="upload-form-files-num"></span></button>
+        </div>
+    </div>
+</form>
+{% endblock form %}
+
 {% block content %}
-
-<!--<div id="home-filter" onclick="toggleFilter()">-->
-<!--    <span>Фильтры</span>-->
-<!--</div>-->
-
-<!--<div id="home-filter-form" style="display: none">-->
-<!--    <form action="" method="get">-->
-<!--        <div id="home-filter-form-buyer">-->
-<!--            <label for="id_buyer">Маркет:</label>-->
-<!--            <input type="text" name="buyer" id="id_buyer">-->
-<!--        </div>-->
-<!--        <div id="home-filter-form-day">-->
-<!--            <label for="id_day">День:</label>-->
-<!--            <input type="number" name="day" step="any" id="id_day">-->
-<!--        </div>-->
-<!--        <div id="home-filter-form-month">-->
-<!--            <label for="id_month">Месяц:</label>-->
-<!--            <input type="number" name="month" step="any" id="id_month">-->
-<!--        </div>-->
-<!--        <div id="home-filter-form-year">-->
-<!--            <label for="id_year">Год:</label>-->
-<!--            <input type="number" name="year" step="any" id="id_year">-->
-<!--        </div>-->
-<!--        <input type="submit" value="Применить" id="home-filter-form-submit-btn"/>-->
-<!--    </form>-->
-<!--</div>-->
-
 <div id="home-group-table">
     <div id="home-group-table-headers">
         <div id="main-content-phone-headers-date">
@@ -69,16 +61,5 @@
     <div id="home-group-table-content-footer-divisor"></div>
     {% endfor %}
 </div>
-
-<script>
-    function toggleFilter() {
-        let filterBlockDisplay =  document.getElementById("home-filter-form").style.display
-        if (filterBlockDisplay == 'none') {
-            document.getElementById("home-filter-form").style.display = 'block';
-        } else {
-            document.getElementById("home-filter-form").style.display = 'none';
-        }
-    }
-</script>
 
 {% endblock content %}

@@ -28,6 +28,7 @@
     <link href="{% static 'css/dish_edit.css' %}" rel="stylesheet">
     <link href="{% static 'css/statistics.css' %}" rel="stylesheet">
     <link href="{% static 'css/add_filename.css' %}" rel="stylesheet">
+    <link href="{% static 'css/upload_file.css' %}" rel="stylesheet">
 
 
     {% endblock %}
@@ -49,40 +50,20 @@
                 </button>
             </a>
         </div>
-        <div id="header-form">
-            <form method="post" enctype="multipart/form-data" id="upload-form">
-                {% csrf_token %}
-                <div id="upload-form-choose-btn-div">
-                    <div id="upload-form-choose-btn">
-                        <label for="id_file_field">Выбрать файл</label>
-                        <input type="file" name="file_field" required id="id_file_field" style="display: none">
-                        <!-- <input type="file" name="file_field" multiple required id="id_file_field" style="display: none"> -->
-                    </div>
-                    <div id="upload-form-err-msg" style="display: none">
-                        <p> << </p>
-                    </div>
-                    <div id="upload-form-submit-div" onclick="validateFiles()">
-                        <button type="submit">Загрузить <span id="upload-form-files-num"></span></button>
-                    </div>
-                </div>
-            </form>
+         <div id="header-form">
+             {% block form %}
+            {% endblock form %}
         </div>
-
-<!--        <form method="post" enctype="multipart/form-data" id="upload-form">-->
-<!--            {% csrf_token %}-->
-<!--            <div id="upload-form-choose-btn-div">-->
-<!--                <div id="upload-form-choose-btn">-->
-<!--                    <label for="id_file_field">Выбрать файл</label>-->
-<!--                    <input type="file" name="file_field" multiple required id="id_file_field" style="display: none">-->
-<!--                </div>-->
-<!--                <div id="upload-form-err-msg" style="display: none">-->
-<!--                    <p> << </p>-->
-<!--                </div>-->
-<!--                <div id="upload-form-submit-div" onclick="validateFiles()">-->
-<!--                    <button type="submit">Загрузить <span id="upload-form-files-num"></span></button>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </form>-->
+        <!-- <div id="header-form">
+            <a href="/upload_file">
+                <button style="border-radius: 10%">Загрузить</button>
+            </a>
+        </div> -->
+        {% if err_msg %}
+        <div id="err_msg">
+            <h5>{{err_msg}}</h5>
+        </div>
+        {% endif %}
     </div>
     {% endblock header %}
 
@@ -105,6 +86,7 @@
         crossorigin="anonymous"></script>
 
     <script src="{% static 'js/base.js' %}"></script>
+    <script src="{% static 'js/statistics.js' %}"></script>
 
     {% endblock javascript %}
 </body>

@@ -21,6 +21,10 @@
         <span class="dish-detail-table-items-2">{{object.price_2}} c.</span>
     </div>
     <div class="dish-detail-table-items">
+        <span class="dish-detail-table-items-1"><b>Цена (продажная) общая: </b></span>
+        <span class="dish-detail-table-items-2">{{total_dish_price_2}} c.</span>
+    </div>
+    <div class="dish-detail-table-items">
         <span class="dish-detail-table-items-1"><b>Общеее количество по маркетам: </b></span>
         <span class="dish-detail-table-items-2">{{total_amount_of_dish}} шт.</span>
     </div>
@@ -42,6 +46,9 @@
             </div>
             <div class="dish-detail-by-buyer-table-markets-date">
                 {{dish.total_dish_price_2_in_order}} c.
+            </div>
+            <div class="dish-detail-by-buyer-table-markets-date">
+                {{dish.price_2}} c.
             </div>
         </div>
     </a>

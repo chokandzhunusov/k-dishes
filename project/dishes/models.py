@@ -4,9 +4,18 @@ from django.db import models
 from django.utils.text import slugify
 
 
+class Market(models.Model):
+    name = models.CharField(max_length=20)
+
+    def __str__(self):
+        return self.name
+
+
 class Order(models.Model):
+    market = models.ForeignKey(Market, on_delete=models.CASCADE, null=True)
     date = models.DateField()
-    buyer = models.CharField(max_length=255)
+
+    # buyer = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now=True)
 
@@ -14,13 +23,13 @@ class Order(models.Model):
         ordering = ['-created']
 
     def save(self, *args, **kwargs):
-        slug_name = str(self.buyer) + '-' + str(self.date) + \
+        slug_name = str(self.market) + '-' + str(self.date) + \
             '-' + str(datetime.datetime.now().microsecond)
         self.slug = slugify('market ' + slug_name)  # allow_unicode=True
         super(Order, self).save(*args, **kwargs)
 
     def __str__(self):
-        return self.buyer
+        return self.market.name
 
 
 class Dish(models.Model):
@@ -31,7 +40,7 @@ class Dish(models.Model):
     name = models.CharField(max_length=255)
     unit = models.CharField(max_length=25)
     rest = models.IntegerField()
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=0)
     return_by_defect = models.IntegerField()
     exchange_by_defect = models.IntegerField()
     price_1 = models.IntegerField(default=0)
@@ -51,7 +60,7 @@ class UniqueDish(models.Model):
     name = models.CharField(max_length=255)
     unit = models.CharField(max_length=25)
     rest = models.IntegerField()
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(default=0)
     return_by_defect = models.IntegerField()
     exchange_by_defect = models.IntegerField()
     price_1 = models.IntegerField(default=0)

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load l10n %}
+
+{% block content %}
+<form method="post"> {% csrf_token %}
+    <h5>
+        Вы уверены что хотите удалить <i><b>{{object.market.name}}</b></i> от <i><b>{{object.date}}</b></i>
+    </h5>
+    <input type="submit" value="Удалить">
+</form>
+
+<style>
+    form > h5 {
+        text-align: center;
+        margin-top: 10%;
+    }
+
+    form > input {
+        align-items: center;
+        margin-top: 2%;
+        margin-left: 50%;
+        border-radius: 10%;
+        background-color: rgb(216, 216, 216);
+    }
+
+</style>
+
+{% endblock %}
