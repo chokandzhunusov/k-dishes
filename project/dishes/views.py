@@ -316,7 +316,6 @@ class FilteredStatisticsListView(views.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total_dish_price_2'] = 0
-
         for dish in self.filterset.qs:
             try:
                 dish_pk_in_list = Dish.objects.filter(code=dish.code)[0]
@@ -325,9 +324,15 @@ class FilteredStatisticsListView(views.ListView):
             except (Dish.DoesNotExist, IndexError) as e:
                 pass
 
+        new_qs = []
+
+        for u_dish in self.filterset.qs:
+            if u_dish.quantity > 0:
+                new_qs.append(u_dish)
+
+        context['new_qs'] = new_qs
         context['filtered_qs'] = self.filterset.qs
         context['filterset'] = self.filterset
-
         return context
 
 

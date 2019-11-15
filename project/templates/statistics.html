@@ -1,31 +1,12 @@
-<!-- {% extends "base.html" %}
+{% extends "base.html" %}
 {% load l10n %}
 
 {% block content %}
-<!-- <div id="filters">
-    <form method="get">
-        <div id="filters-form">
-            <div id="days">
-                {{filterset.form.day}}
-            </div>
-            <div id="months">
-                {{filterset.form.month}}
-            </div>
-            <div id="years">
-                {{filterset.form.year}}
-            </div>
-        </div>
-
-        <button type="submit">Применить</button>
-    </form>
-</div> -->
-
-
 <div id="statistics-table">
     <div id="order-detail-table-header">
          <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Кол-во элементов: </b></span>
-            <span class="order-detail-table-items-2">{{filterset.qs | length}} шт.</span>
+            <span class="order-detail-table-items-2">{{new_qs | length}} шт.</span>
         </div>
         <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Кол-во продукции: </b></span>
@@ -36,14 +17,6 @@
             <span class="order-detail-table-items-2">{{total_dish_price_2}} c.</span>
         </div>
     </div>
-   <!-- <div id="order-detail-table-header">
-       <div id="order-detail-table-buyer-name">
-           <h3>Cтатистика</h3>
-       </div>
-       <div id="order-detail-table-filter-btn" onclick="toggleFilter()">
-           <span>Фильтры</span>
-       </div>
-   </div> -->
 
     <div id="order-detail-table-buyer-name-divisor"></div>
 
@@ -88,13 +61,12 @@
 
     <div id="order-detail-table-dish-header-divisor"></div>
 
-    {% for dish in filtered_qs %}
-        <!-- {% if dish.quantity != 0 %} -->
+    {% for dish in new_qs %}
+
             <a href="/statistics/{{dish.pk}}">
-            <!-- <a href="/statistics/{{dish.pk_in_dish_list}}"> -->
                 <div class="order-detail-table-dish">
                 <div class="order-detail-table-dish-number">
-                    <span>{{dish.pk}}</span>
+                    <span>{{forloop.counter}}</span>
                 </div>
                 <div class="order-detail-table-dish-bar-code">
                     <span>{{dish.bar_code}}</span>
@@ -114,7 +86,6 @@
             </div>
             </a>
             <div class="order-detail-table-dish-divisor"></div>
-        <!-- {% endif %} -->
     {% endfor %}
 </div>
 
