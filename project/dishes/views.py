@@ -50,7 +50,9 @@ class BaseView(views.View):
 
                             # Extract date
                             if 'Заказ поставщику' in str(row_item):
-                                date = list(datefinder.find_dates(row_item))
+                                start_index = row_item.find('от')
+                                date_name = row_item[slice(start_index, len(row_item))]
+                                date = list(datefinder.find_dates(date_name))
                                 self.date = date[0].date()
 
                     # Check if there is market name in file
@@ -317,11 +319,13 @@ class FilteredStatisticsListView(views.ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['total_dish_price_2'] = 0
+        context['total_amount_of_dish'] = 0
         for dish in self.filterset.qs:
             try:
                 dish_pk_in_list = Dish.objects.filter(code=dish.code)[0]
                 dish.pk_in_dish_list = dish_pk_in_list.pk
                 context['total_dish_price_2'] += dish.price_2_total
+                context['total_amount_of_dish'] += dish.quantity
             except (Dish.DoesNotExist, IndexError) as e:
                 pass
 
