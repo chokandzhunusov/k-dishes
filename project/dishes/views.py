@@ -4,11 +4,18 @@ from django.urls import reverse
 from django.shortcuts import redirect, render
 
 import django.views.generic as views
-from django.http import QueryDict
+from django.http import QueryDict, HttpResponse
 
 from .models import Market, Order, Dish, UniqueDish
 from .forms import UploadFileForm, DishEditForm, UploadDishPriceForm
 from .filters import MarketFilterSet, MarketDetailFilterSet, StatisticsFilterSet
+
+
+class CreateMarketsView(views.View):
+    def get(self, request, *args, **kwargs):
+        for i in range(1, 41):
+            Market.objects.get_or_create(name=f'Гипермаркет {i}')
+        return HttpResponse('Done')
 
 
 class UploadDishPriceView(views.FormView):
