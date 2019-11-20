@@ -3,6 +3,10 @@ from django import forms
 from .models import Dish, Order
 
 
+class UploadDishPriceForm(forms.Form):
+    file_field = forms.FileField(label='Файл')
+
+
 class UploadFileForm(forms.Form):
     MARKETS = (
         ('', '-------------'),
@@ -71,10 +75,3 @@ class FilterForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['date']
-
-    # DAYS = (
-    #     ('', '----------------'),
-    #     ('1', 'Январь'),
-    #     ('2', 'Февраль'),
-    # )
-    # days = forms.ChoiceField(choices=DAYS)

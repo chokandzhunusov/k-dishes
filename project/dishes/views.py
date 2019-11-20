@@ -7,8 +7,63 @@ import django.views.generic as views
 from django.http import QueryDict
 
 from .models import Market, Order, Dish, UniqueDish
-from .forms import UploadFileForm, DishEditForm
+from .forms import UploadFileForm, DishEditForm, UploadDishPriceForm
 from .filters import MarketFilterSet, MarketDetailFilterSet, StatisticsFilterSet
+
+
+class UploadDishPriceView(views.FormView):
+    form_class = UploadDishPriceForm
+    template_name = 'upload_dish_price.html'
+    success_url = '/'
+
+    def post(self, request, *args, **kwargs):
+        files = request.FILES.getlist('file_field')
+        for file in files:
+            self.data = file.get_array()
+
+            self.numbers = []
+            self.names = []
+            self.price_1 = []
+            self.price_2 = []
+
+            self.column_number_index = int()
+            self.column_name_index = int()
+            self.column_price_1_index = int()
+            self.column_price_2_index = int()
+
+            for row_index, row in enumerate(self.data):
+                for row_item in row:
+                    if row_item == '№':
+                        self.dishes_header_row_index = row_index
+
+            for row_item_index, row_item in enumerate(
+                    self.data[self.dishes_header_row_index]):
+
+                if row_item == '№':
+                    self.column_number_index = row_item_index
+                elif row_item == 'наименование':
+                    self.column_name_index = row_item_index
+                elif row_item == 'Своя цена':
+                    self.column_price_1_index = row_item_index
+                elif row_item == 'Продажная цена':
+                    self.column_price_2_index = row_item_index
+
+            for i in range(self.dishes_header_row_index + 1, len(self.data)):
+                if isinstance(self.data[i][self.column_number_index], int):
+                    self.numbers.append(self.data[i][self.column_number_index])
+                    self.names.append(self.data[i][self.column_name_index])
+                    self.price_1.append(self.data[i][self.column_price_1_index])
+                    self.price_2.append(self.data[i][self.column_price_2_index])
+
+            for i in range(len(self.numbers)):
+                try:
+                    u_dish = UniqueDish.objects.get(name=self.names[i])
+                    u_dish.price_1 = self.price_1[i]
+                    u_dish.price_2 = self.price_2[i]
+                    u_dish.save()
+                except Exception as e:
+                    print(e)
+            return render(request, 'home.html')
 
 
 class BaseView(views.View):
@@ -60,6 +115,7 @@ class BaseView(views.View):
                         market=self.market,
                         date=self.date)
             except Exception as e:
+                print(e)
                 return render(request, 'upload_file.html')
 
         for file in files:
@@ -331,7 +387,7 @@ class FilteredStatisticsListView(views.ListView):
 
         new_qs = []
 
-        for u_dish in self.filterset.qs:
+        for u_dish in self.filterset.qs.order_by('-quantity'):
             if u_dish.quantity > 0:
                 new_qs.append(u_dish)
 
@@ -358,7 +414,7 @@ class DishStatisticsView(views.DetailView):
             order = Order.objects.get(pk=order_id)
             try:
                 context['dishes'] |= order.dish_set.all().filter(
-                    code=self.object.code).order_by('order__date')
+                    code=self.object.code).order_by('-quantity')
             except Dish.DoesNotExist:
                 pass
 

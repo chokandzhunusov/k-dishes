@@ -11,4 +11,5 @@ urlpatterns = [
     path('statistics/', views.StatisticsListView.as_view(), name='statistics_list'),
     path('statistics/<int:pk>/', views.DishStatisticsView.as_view(), name='dish_statistics'),
     path('upload_file/', views.UploadFileView.as_view(), name='upload_file'),
+    path('upload_dish_price/', views.UploadDishPriceView.as_view(), name='upload_dish_price'),
 ]
