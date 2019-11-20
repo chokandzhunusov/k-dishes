@@ -5,6 +5,7 @@ from django.shortcuts import redirect, render
 
 import django.views.generic as views
 from django.http import QueryDict, HttpResponse
+from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Market, Order, Dish, UniqueDish
 from .forms import UploadFileForm, DishEditForm, UploadDishPriceForm
@@ -30,11 +31,13 @@ class UploadDishPriceView(views.FormView):
 
             self.numbers = []
             self.names = []
+            self.bar_codes = []
             self.price_1 = []
             self.price_2 = []
 
             self.column_number_index = int()
             self.column_name_index = int()
+            self.column_bar_code_index = int()
             self.column_price_1_index = int()
             self.column_price_2_index = int()
 
@@ -50,6 +53,8 @@ class UploadDishPriceView(views.FormView):
                     self.column_number_index = row_item_index
                 elif row_item == 'наименование':
                     self.column_name_index = row_item_index
+                elif row_item == 'штрих код':
+                    self.column_bar_code_index = row_item_index
                 elif row_item == 'Своя цена':
                     self.column_price_1_index = row_item_index
                 elif row_item == 'Продажная цена':
@@ -59,6 +64,7 @@ class UploadDishPriceView(views.FormView):
                 if isinstance(self.data[i][self.column_number_index], int):
                     self.numbers.append(self.data[i][self.column_number_index])
                     self.names.append(self.data[i][self.column_name_index])
+                    self.bar_codes.append(self.data[i][self.column_bar_code_index])
                     self.price_1.append(self.data[i][self.column_price_1_index])
                     self.price_2.append(self.data[i][self.column_price_2_index])
 
@@ -68,9 +74,16 @@ class UploadDishPriceView(views.FormView):
                     u_dish.price_1 = self.price_1[i]
                     u_dish.price_2 = self.price_2[i]
                     u_dish.save()
-                except Exception as e:
-                    print(e)
-            return render(request, 'home.html')
+                except UniqueDish.DoesNotExist:
+                    try:
+                        u_dish = UniqueDish.objects.get(bar_code=self.bar_codes[i])
+                        u_dish.price_1 = self.price_1[i]
+                        u_dish.price_2 = self.price_2[i]
+                        u_dish.save()
+                    except UniqueDish.DoesNotExist:
+                        print('Unique dish does not exists')
+
+            return redirect('home')
 
 
 class BaseView(views.View):
