@@ -89,94 +89,116 @@ class UploadDishPriceView(views.FormView):
 class BaseView(views.View):
     def post(self, request, *args, **kwargs):
         files = request.FILES.getlist('file_field')
+
         try:
             for file in files:
                 data = file.get_array()
-        except:
+        except Exception as e:
+            print(e)
             request.session['not_exls_file'] = True
             return redirect('home')
 
         try:
-            market, created = Market.objects.get_or_create(name=request.POST['market'])
-            day = request.POST['date_day']
-            month = request.POST['date_month']
-            year = request.POST['date_year']
-            date = f'{day}-{month}-{year}'
-            date = datetime.strptime(date, "%d-%m-%Y").date()
+            for file in files:
+                data = file.get_array()
 
-            self.order = Order.objects.create(
-                market=market,
-                date=date)
-        except:
-            try:
-                for file in files:
-                    data = file.get_array()
+                self.market = None
+                self.date = None
 
-                    for row in data:
-                        for row_item in row:
-                            # Extract market
-                            if 'Гипермаркет' in str(row_item):
-                                start_index = row_item.find('Гипермаркет')
-                                market_name = row_item[slice(start_index, len(row_item))]
-                                market_num = [int(s) for s in market_name.split() if s.isdigit()][0]
+                for row in data:
+                    for row_item in row:
+                        # Extract market
+                        if 'Гипермаркет' in str(row_item):
+                            start_index = row_item.find('Гипермаркет')
+                            market_name = row_item[slice(start_index, len(row_item))]
+                            market_num = [int(s) for s in market_name.split() if s.isdigit()][0]
 
-                                self.market = Market.objects.get(
-                                    name__exact=f'Гипермаркет {market_num}')
+                            self.market = Market.objects.get(
+                                name=f'Гипермаркет {market_num}')
 
-                            # Extract date
-                            if 'Заказ поставщику' in str(row_item):
-                                start_index = row_item.find('от')
-                                date_name = row_item[slice(start_index, len(row_item))]
-                                date = list(datefinder.find_dates(date_name))
-                                self.date = date[0].date()
-
-                    # Check if there is market name in file
-                    self.order = Order.objects.create(
-                        market=self.market,
-                        date=self.date)
-            except Exception as e:
-                print(e)
-                return render(request, 'upload_file.html')
+                        # Extract date
+                        if 'Заказ поставщику' in str(row_item):
+                            start_index = row_item.find('от')
+                            date_name = row_item[slice(start_index, len(row_item))]
+                            date = list(datefinder.find_dates(date_name))
+                            self.date = date[0].date()
+                if not self.market:
+                    raise Exception()
+        except Exception as e:
+            print(e)
+            request.session['err_in_file'] = file.name
+            return redirect('home')
 
         for file in files:
-            self.data = file.get_array()
+            data = file.get_array()
 
-            self.initialize_columns()
-            self.initialize_column_indexes()
+            self.market = None
+            self.date = None
 
-            self.dishes_header_row_index = int()
-
-            # Find dishes header row and index of that row
-            for row_index, row in enumerate(self.data):
+            for row in data:
                 for row_item in row:
-                    if row_item == '№':
-                        self.dishes_header_row_index = row_index
+                    # Extract market
+                    if 'Гипермаркет' in str(row_item):
+                        start_index = row_item.find('Гипермаркет')
+                        market_name = row_item[slice(start_index, len(row_item))]
+                        market_num = [int(s) for s in market_name.split() if s.isdigit()][0]
 
-            self.set_column_indexes()
-            self.collect_dishes_by_column()
+                        self.market = Market.objects.get(
+                            name__exact=f'Гипермаркет {market_num}')
 
-            for i in range(len(self.numbers)):
+                    # Extract date
+                    if 'Заказ поставщику' in str(row_item):
+                        start_index = row_item.find('от')
+                        date_name = row_item[slice(start_index, len(row_item))]
+                        date = list(datefinder.find_dates(date_name))
+                        self.date = date[0].date()
 
-                if not self.exchange_by_defects[i]:
-                    self.exchange_by_defects[i] = 0
+            # Check if there is market name in file
+            self.order = Order.objects.create(
+                market=self.market,
+                date=self.date)
 
-                if not self.return_by_defects[i]:
-                    self.return_by_defects[i] = 0
-
-                if not self.rests[i].strip():
-                    self.rests[i] = 0
-
-                self.codes[i] = self.codes[i] or 0
-                self.bar_codes[i] = self.bar_codes[i] or 0
-                self.quantities[i] = self.quantities[i] or 0
-
-                self.update_or_create_unq_dish(i)
-
-                self.unique_dish = UniqueDish.objects.get(code=self.codes[i])
-
-                self.create_dish(i)
+            self.create_dishes(file)
 
         return redirect('/')
+
+    def create_dishes(self, file):
+        self.data = file.get_array()
+
+        self.initialize_columns()
+        self.initialize_column_indexes()
+
+        self.dishes_header_row_index = int()
+
+        # Find dishes header row and index of that row
+        for row_index, row in enumerate(self.data):
+            for row_item in row:
+                if row_item == '№':
+                    self.dishes_header_row_index = row_index
+
+        self.set_column_indexes()
+        self.collect_dishes_by_column()
+
+        for i in range(len(self.numbers)):
+
+            if not self.exchange_by_defects[i]:
+                self.exchange_by_defects[i] = 0
+
+            if not self.return_by_defects[i]:
+                self.return_by_defects[i] = 0
+
+            if not self.rests[i].strip():
+                self.rests[i] = 0
+
+            self.codes[i] = self.codes[i] or 0
+            self.bar_codes[i] = self.bar_codes[i] or 0
+            self.quantities[i] = self.quantities[i] or 0
+
+            self.update_or_create_unq_dish(i)
+
+            self.unique_dish = UniqueDish.objects.get(code=self.codes[i])
+
+            self.create_dish(i)
 
     def initialize_columns(self):
         self.numbers = []
@@ -291,6 +313,14 @@ class FilteredHomeListView(views.ListView, BaseView):
                 self.request.session['not_exls_file'] = False
         except KeyError:
             pass
+
+        try:
+            if self.request.session['err_in_file']:
+                context['err_msg'] = f"Пожалуйста введите название маркета в файл {self.request.session['err_in_file']}"
+                self.request.session['err_in_file'] = False
+        except KeyError:
+            pass
+
         context['filterset'] = self.filterset
 
         for order in context['filterset'].qs:
@@ -396,25 +426,49 @@ class FilteredStatisticsListView(views.ListView):
         context = super().get_context_data(**kwargs)
         context['total_dish_price_2'] = 0
         context['total_amount_of_dish'] = 0
+        arr = []
         for dish in self.filterset.qs:
             try:
                 dish_pk_in_list = Dish.objects.filter(code=dish.code)[0]
                 dish.pk_in_dish_list = dish_pk_in_list.pk
                 context['total_dish_price_2'] += dish.price_2_total
                 context['total_amount_of_dish'] += dish.quantity
+                arr.append(dish)
             except (Dish.DoesNotExist, IndexError) as e:
                 pass
 
         new_qs = []
 
-        for u_dish in self.filterset.qs.order_by('-quantity'):
-            if u_dish.quantity > 0:
-                new_qs.append(u_dish)
+        n = len(arr)
+        self.quickSort(arr, 0, n-1)
+
+        for i in reversed(range(n)):
+            if arr[i].quantity > 0:
+                new_qs.append(arr[i])
 
         context['new_qs'] = new_qs
         context['filtered_qs'] = self.filterset.qs
         context['filterset'] = self.filterset
         return context
+
+    def partition(self, arr, low, high):
+        i = (low-1)
+        pivot = arr[high].quantity
+
+        for j in range(low, high):
+            if arr[j].quantity <= pivot:
+                i = i+1
+                arr[i], arr[j] = arr[j], arr[i]
+
+        arr[i+1], arr[high] = arr[high], arr[i+1]
+        return (i+1)
+
+    def quickSort(self, arr, low, high):
+        if low < high:
+            pi = self.partition(arr, low, high)
+
+            self.quickSort(arr, low, pi-1)
+            self.quickSort(arr, pi+1, high)
 
 
 class StatisticsListView(FilteredStatisticsListView):
