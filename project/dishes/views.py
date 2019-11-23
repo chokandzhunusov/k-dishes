@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 import datefinder
 from django.urls import reverse
@@ -93,6 +94,7 @@ class BaseView(views.View):
         try:
             for file in files:
                 data = file.get_array()
+
         except Exception as e:
             print(e)
             request.session['not_exls_file'] = True
@@ -111,7 +113,7 @@ class BaseView(views.View):
                         if 'Гипермаркет' in str(row_item):
                             start_index = row_item.find('Гипермаркет')
                             market_name = row_item[slice(start_index, len(row_item))]
-                            market_num = [int(s) for s in market_name.split() if s.isdigit()][0]
+                            market_num = int(re.findall(r'\b\d+\b', market_name)[0])
 
                             self.market = Market.objects.get(
                                 name=f'Гипермаркет {market_num}')
@@ -119,8 +121,14 @@ class BaseView(views.View):
                         # Extract date
                         if 'Заказ поставщику' in str(row_item):
                             start_index = row_item.find('от')
-                            date_name = row_item[slice(start_index, len(row_item))]
-                            date = list(datefinder.find_dates(date_name))
+                            date_name = row_item[slice(start_index, len(row_item))].split()[1]
+                            date_name_split_by_dot = date_name.split('.')
+                            data_for_parse = ''
+                            data_for_parse = date_name_split_by_dot[1] + '.' + \
+                                date_name_split_by_dot[0] + '.' + date_name_split_by_dot[2]
+
+                            date = list(datefinder.find_dates(data_for_parse))
+
                             self.date = date[0].date()
                 if not self.market:
                     raise Exception()
@@ -141,7 +149,7 @@ class BaseView(views.View):
                     if 'Гипермаркет' in str(row_item):
                         start_index = row_item.find('Гипермаркет')
                         market_name = row_item[slice(start_index, len(row_item))]
-                        market_num = [int(s) for s in market_name.split() if s.isdigit()][0]
+                        market_num = int(re.findall(r'\b\d+\b', market_name)[0])
 
                         self.market = Market.objects.get(
                             name__exact=f'Гипермаркет {market_num}')
@@ -149,8 +157,14 @@ class BaseView(views.View):
                     # Extract date
                     if 'Заказ поставщику' in str(row_item):
                         start_index = row_item.find('от')
-                        date_name = row_item[slice(start_index, len(row_item))]
-                        date = list(datefinder.find_dates(date_name))
+                        date_name = row_item[slice(start_index, len(row_item))].split()[1]
+                        date_name_split_by_dot = date_name.split('.')
+                        data_for_parse = ''
+                        data_for_parse = date_name_split_by_dot[1] + '.' + \
+                            date_name_split_by_dot[0] + '.' + date_name_split_by_dot[2]
+
+                        date = list(datefinder.find_dates(data_for_parse))
+
                         self.date = date[0].date()
 
             # Check if there is market name in file
