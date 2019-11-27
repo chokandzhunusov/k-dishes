@@ -439,6 +439,7 @@ class FilteredStatisticsListView(views.ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['total_dish_price_1'] = 0
         context['total_dish_price_2'] = 0
         context['total_amount_of_dish'] = 0
         arr = []
@@ -446,6 +447,7 @@ class FilteredStatisticsListView(views.ListView):
             try:
                 dish_pk_in_list = Dish.objects.filter(code=dish.code)[0]
                 dish.pk_in_dish_list = dish_pk_in_list.pk
+                context['total_dish_price_1'] += dish.price_1_total
                 context['total_dish_price_2'] += dish.price_2_total
                 context['total_amount_of_dish'] += dish.quantity
                 arr.append(dish)

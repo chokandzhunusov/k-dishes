@@ -160,6 +160,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
     def filter_by_year(self, queryset, name, value):
         for u_dish in queryset:
             u_dish.quantity = 0
+            u_dish.price_1_total = 0
             u_dish.price_2_total = 0
         for year in value:
             for order in Order.objects.filter(date__year=year):
@@ -170,6 +171,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
                     try:
                         dish = order_dishes.get(code=u_dish.code)
                         u_dish.quantity += dish.quantity
+                        u_dish.price_1_total += dish.price_1 * dish.quantity
                         u_dish.price_2_total += dish.price_2 * dish.quantity
                     except Dish.DoesNotExist:
                         pass
@@ -186,6 +188,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
         if self.order_by_years:
             for u_dish in queryset:
                 u_dish.quantity = 0
+                u_dish.price_1_total = 0
                 u_dish.price_2_total = 0
             for month in value:
                 for order in self.order_by_years.filter(date__month=month):
@@ -196,6 +199,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
                         try:
                             dish = order_dishes.get(code=u_dish.code)
                             u_dish.quantity += dish.quantity
+                            u_dish.price_1_total += dish.price_1 * dish.quantity
                             u_dish.price_2_total += dish.price_2 * dish.quantity
                         except Dish.DoesNotExist:
                             pass
@@ -210,6 +214,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
                             try:
                                 dish = order_dishes.get(code=u_dish.code)
                                 u_dish.quantity += dish.quantity
+                                u_dish.price_1_total += dish.price_1 * dish.quantity
                                 u_dish.price_2_total += dish.price_2 * dish.quantity
                             except Dish.DoesNotExist:
                                 pass
@@ -221,6 +226,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
         if self.order_by_months:
             for u_dish in queryset:
                 u_dish.quantity = 0
+                u_dish.price_1_total = 0
                 u_dish.price_2_total = 0
             for day in value:
                 for order in self.order_by_months.filter(date__day=day):
@@ -230,6 +236,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
                         try:
                             dish = order_dishes.get(code=u_dish.code)
                             u_dish.quantity += dish.quantity
+                            u_dish.price_1_total += dish.price_1 * dish.quantity
                             u_dish.price_2_total += dish.price_2 * dish.quantity
                         except Dish.DoesNotExist:
                             pass
@@ -237,6 +244,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
         elif self.order_by_years:
             for u_dish in queryset:
                 u_dish.quantity = 0
+                u_dish.price_1_total = 0
                 u_dish.price_2_total = 0
             for day in value:
                 for order in self.order_by_years.filter(date__day=day):
@@ -246,6 +254,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
                         try:
                             dish = order_dishes.get(code=u_dish.code)
                             u_dish.quantity += dish.quantity
+                            u_dish.price_1_total += dish.price_1 * dish.quantity
                             u_dish.price_2_total += dish.price_2 * dish.quantity
                         except Dish.DoesNotExist:
                             pass
@@ -259,6 +268,7 @@ class StatisticsFilterSet(django_filters.FilterSet):
                             try:
                                 dish = order_dishes.get(code=u_dish.code)
                                 u_dish.quantity += dish.quantity
+                                u_dish.price_1_total += dish.price_1 * dish.quantity
                                 u_dish.price_2_total += dish.price_2 * dish.quantity
                             except Dish.DoesNotExist:
                                 pass
