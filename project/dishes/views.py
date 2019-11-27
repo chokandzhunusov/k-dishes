@@ -201,8 +201,9 @@ class BaseView(views.View):
             if not self.return_by_defects[i]:
                 self.return_by_defects[i] = 0
 
-            if not self.rests[i].strip():
-                self.rests[i] = 0
+            if not isinstance(self.rests[i], int):
+                if not self.rests[i].strip():
+                    self.rests[i] = 0
 
             self.codes[i] = self.codes[i] or 0
             self.bar_codes[i] = self.bar_codes[i] or 0
