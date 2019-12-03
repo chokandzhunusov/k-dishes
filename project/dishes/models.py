@@ -6,6 +6,9 @@ from django.utils.text import slugify
 
 class Market(models.Model):
     name = models.CharField(max_length=20)
+    # orders_count = models.IntegerField(default=0)
+    # orders_total_by_price_1 = models.IntegerField(default=0)
+    # orders_total_by_price_2 = models.IntegerField(default=0)
 
     def __str__(self):
         return self.name
@@ -13,9 +16,12 @@ class Market(models.Model):
 
 class Order(models.Model):
     market = models.ForeignKey(Market, on_delete=models.CASCADE, null=True)
+    dishes_quantity = models.IntegerField(default=0)
+    total_dishes_quantity = models.IntegerField(default=0)
+    total_by_price_1 = models.IntegerField(default=0)
+    total_by_price_2 = models.IntegerField(default=0)
     date = models.DateField()
 
-    # buyer = models.CharField(max_length=255)
     slug = models.SlugField(unique=True)
     created = models.DateTimeField(auto_now=True)
 

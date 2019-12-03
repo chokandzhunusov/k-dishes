@@ -3,7 +3,7 @@ from .models import Order, Dish, UniqueDish, Market
 
 
 class OrderAdmin(admin.ModelAdmin):
-    fields = ('date', 'market')
+    fields = ('date', 'market', 'dishes_quantity', 'total_dishes_quantity', 'total_by_price_1', 'total_by_price_2')
 
 
 class DishAdmin(admin.ModelAdmin):

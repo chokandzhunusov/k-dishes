@@ -10,6 +10,7 @@ urlpatterns = [
     path('dish/<int:pk>/edit', views.DishEditView.as_view(), name='dish_edit'),
     path('statistics/', views.StatisticsListView.as_view(), name='statistics_list'),
     path('statistics/<int:pk>/', views.DishStatisticsView.as_view(), name='dish_statistics'),
+    path('statistics_by_market/', views.StatisticsByMarketListView.as_view(), name='statistics_by_market'),
     path('upload_file/', views.UploadFileView.as_view(), name='upload_file'),
     path('upload_dish_price/', views.UploadDishPriceView.as_view(), name='upload_dish_price'),
     path('create_markets/', views.CreateMarketsView.as_view(), name='create_markets'),

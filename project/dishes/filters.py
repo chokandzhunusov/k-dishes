@@ -1,7 +1,7 @@
 import django_filters
 from django import forms
 
-from .models import Order, Dish, UniqueDish
+from .models import Order, Dish, UniqueDish, Market
 
 
 class MarketFilterSet(django_filters.FilterSet):
@@ -274,3 +274,39 @@ class StatisticsFilterSet(django_filters.FilterSet):
                                 pass
         self.req_session['order_ids'] = self.order_ids
         return queryset
+
+
+class MarketStatisticsFilterSet(StatisticsFilterSet):
+
+    def filter_by_year(self, queryset, name, value):
+        filtered_orders_by_year = Order.objects.none()
+
+        for market in queryset:
+            for year in value:
+                filtered_orders_by_year |= market.order_set.all().filter(date__year=year)
+                market.orders_count = filtered_orders_by_year.count()
+
+                market.orders_total_by_price_2 = 0
+                for order in filtered_orders_by_year:
+                    market.orders_total_by_price_2 += order.total_by_price_2
+            market.orders = filtered_orders_by_year
+        return queryset
+
+    def filter_by_month(self, queryset, name, value):
+        filtered_orders_by_month = Order.objects.none()
+
+        for market in queryset:
+            for month in value:
+                try:
+                    filtered_orders_by_month |= market.orders.filter(date__month=month)
+                    market.orders_count = filtered_orders_by_month.count()
+                    market.orders_total_by_price_2 = 0
+                    for order in filtered_orders_by_month:
+                        market.orders_total_by_price_2 += order.total_by_price_2
+                except AttributeError:
+                    print('Market order does not exist')
+
+            market.orders = filtered_orders_by_month
+
+        return queryset
+

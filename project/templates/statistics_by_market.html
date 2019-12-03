@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+{% load l10n %}
+
+{% block content %}
+<div id="statistics-table">
+    <!-- <div id="order-detail-table-header">
+         <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Кол-во элементов: </b></span>
+            <span class="order-detail-table-items-2">{{new_qs | length}} шт.</span>
+        </div>
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Кол-во продукции: </b></span>
+            <span class="order-detail-table-items-2">{{total_amount_of_dish}} шт.</span>
+        </div>
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Сумма (общая по покупочной цене): </b></span>
+            <span class="order-detail-table-items-2">{{total_dish_price_1}} c.</span>
+        </div>
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Сумма (общая по продажной цене): </b></span>
+            <span class="order-detail-table-items-2">{{total_dish_price_2}} c.</span>
+        </div>
+    </div> -->
+
+    <div id="order-detail-table-buyer-name-divisor"></div>
+
+    <div id="filters">
+        <form method="get">
+            <div id="filters-form">
+                <div id="months">
+                    {{filterset.form.month}}
+                </div>
+                <div id="years">
+                    {{filterset.form.year}}
+                </div>
+            </div>
+
+            <button type="submit">Применить</button>
+        </form>
+    </div>
+
+    <div id="order-detail-table-dish-header">
+        <div id="order-detail-table-dish-header-number">
+            <span>№</span>
+        </div>
+        <div id="order-detail-table-dish-header-bar-code">
+            <span>Гипермаркет</span>
+        </div>
+        <div id="order-detail-table-dish-header-name">
+            <span>Количество заказов</span>
+        </div>
+        <div id="order-detail-table-dish-header-quantity">
+            <span>Общая сумма по продажной цене</span>
+        </div>
+    </div>
+
+    <div id="order-detail-table-dish-header-divisor"></div>
+
+    {% for market in new_qs %}
+
+            <a href="/statistics/{{dish.pk}}">
+                <div class="order-detail-table-dish">
+                <div class="order-detail-table-dish-number">
+                    <span>{{forloop.counter}}</span>
+                </div>
+                <div class="order-detail-table-dish-bar-code">
+                    <span>{{market.name}}</span>
+                </div>
+                <div class="order-detail-table-dish-name">
+                    <span>{{market.orders_count}}</span>
+                </div>
+                <div class="order-detail-table-dish-quantity">
+                    <span>{{market.orders_total_by_price_2}}</span>
+                </div>
+            </div>
+            </a>
+            <div class="order-detail-table-dish-divisor"></div>
+    {% endfor %}
+</div>
+
+<script>
+    function toggleFilter() {
+        let filterBlockDisplay =  document.getElementById("order-detail-filter-form").style.display
+        if (filterBlockDisplay == 'none') {
+            document.getElementById("order-detail-filter-form").style.display = 'block';
+        } else {
+            document.getElementById("order-detail-filter-form").style.display = 'none';
+        }
+    }
+</script>
+
+{% endblock content %} -->

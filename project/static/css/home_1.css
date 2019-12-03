@@ -1,3 +1,14 @@
+#paginator {
+  display: flex;
+  justify-content: center;
+  margin-top: 5%;
+}
+
+#paginator > ul > li {
+  margin-left: 10px;
+  font-size: 20px;
+}
+
 #err_msg {
     position: absolute;
     left: 40%;

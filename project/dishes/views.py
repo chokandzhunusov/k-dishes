@@ -10,7 +10,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 from .models import Market, Order, Dish, UniqueDish
 from .forms import UploadFileForm, DishEditForm, UploadDishPriceForm
-from .filters import MarketFilterSet, MarketDetailFilterSet, StatisticsFilterSet
+from .filters import MarketFilterSet, MarketDetailFilterSet, StatisticsFilterSet, MarketStatisticsFilterSet
 
 
 class CreateMarketsView(views.View):
@@ -174,6 +174,14 @@ class BaseView(views.View):
 
             self.create_dishes(file)
 
+            # To save total_price_1 after parsing file
+            self.order.save()
+            # Update data of market
+            # self.market.orders_count += 1
+            # self.market.orders_total_by_price_1 += self.order.total_by_price_1
+            # self.market.orders_total_by_price_2 += self.order.total_by_price_2
+            # self.market.save()
+
         return redirect('/')
 
     def create_dishes(self, file):
@@ -292,6 +300,11 @@ class BaseView(views.View):
                 exchange_by_defect=self.exchange_by_defects[i])
 
     def create_dish(self, i):
+        self.order.dishes_quantity += 1
+        self.order.total_dishes_quantity += int(self.quantities[i])
+        self.order.total_by_price_1 += self.unique_dish.price_1 * int(self.quantities[i])
+        self.order.total_by_price_2 += self.unique_dish.price_2 * int(self.quantities[i])
+
         Dish.objects.create(
             order=self.order,
             number=self.numbers[i],
@@ -307,18 +320,11 @@ class BaseView(views.View):
             price_2=self.unique_dish.price_2)
 
 
-class FilteredHomeListView(views.ListView, BaseView):
+class HomeListView(views.ListView, BaseView):
     template_name = 'home.html'
     form_class = UploadFileForm
     model = Order
-
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        self.filterset = self.filterset_class(self.request.GET,
-                                              queryset=queryset)
-
-        # Return the filtered queryset
-        return self.filterset.qs.distinct()
+    paginate_by = 20
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -336,23 +342,7 @@ class FilteredHomeListView(views.ListView, BaseView):
         except KeyError:
             pass
 
-        context['filterset'] = self.filterset
-
-        for order in context['filterset'].qs:
-
-            order_total_price_2 = 0
-
-            for dish in order.dish_set.all():
-                order_total_price_2 += (dish.price_2 * dish.quantity)
-
-            order.total_price_2 = order_total_price_2
-            order.total_dishes = order.dish_set.all().count()
         return context
-
-
-class HomeListView(FilteredHomeListView):
-    filterset_class = MarketFilterSet
-    paginate_by = 20
 
 
 class FilteredOrderDetailView(views.ListView, BaseView):
@@ -372,11 +362,13 @@ class FilteredOrderDetailView(views.ListView, BaseView):
         context['totall_price_2'] = 0
         context['totall_dishes'] = 0
 
-        for dish in context['filterset'].qs:
-            # unique_dish = UniqueDish.objects.get(code=dish.code)
-            # dish.price_2 = unique_dish.price_2
-            context['totall_price_2'] += dish.price_2 * dish.quantity
-            context['totall_dishes'] += dish.quantity
+        context['dishes_quantity'] = self.filterset.qs[1].order.dishes_quantity
+        context['total_dishes_quantity'] = self.filterset.qs[1].order.total_dishes_quantity
+
+        context['total_by_price_1'] = self.filterset.qs[1].order.total_by_price_1
+        context['total_by_price_2'] = self.filterset.qs[1].order.total_by_price_2
+
+        context['diff_t_by_p1_t_by_p2'] = context['total_by_price_2'] - context['total_by_price_1']
 
         context['object'] = Order.objects.get(slug=self.kwargs['slug'])
         return context
@@ -490,6 +482,66 @@ class FilteredStatisticsListView(views.ListView):
 
 class StatisticsListView(FilteredStatisticsListView):
     filterset_class = StatisticsFilterSet
+
+
+class FilteredStatisticsByMarketListView(views.ListView):
+    model = Market
+    template_name = 'statistics_by_market.html'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        year = datetime.today().year
+        month = datetime.today().month
+        if not self.request.GET:
+            self.request.GET = QueryDict(f'year={year}&month={month}')
+
+        self.filterset = self.filterset_class(self.request,
+                                              queryset=queryset)
+
+        return self.filterset.qs.distinct()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        arr = []
+        new_qs = []
+
+        for market in self.filterset.qs:
+            arr.append(market)
+
+        n = len(arr)
+        self.quickSort(arr, 0, n-1)
+
+        for i in reversed(range(n)):
+            if arr[i].orders_total_by_price_2 > 0:
+                new_qs.append(arr[i])
+
+        context['new_qs'] = new_qs
+        context['filterset'] = self.filterset
+
+        return context
+
+    def partition(self, arr, low, high):
+        i = (low-1)
+        pivot = arr[high].orders_total_by_price_2
+
+        for j in range(low, high):
+            if arr[j].orders_total_by_price_2 <= pivot:
+                i = i+1
+                arr[i], arr[j] = arr[j], arr[i]
+
+        arr[i+1], arr[high] = arr[high], arr[i+1]
+        return (i+1)
+
+    def quickSort(self, arr, low, high):
+        if low < high:
+            pi = self.partition(arr, low, high)
+
+            self.quickSort(arr, low, pi-1)
+            self.quickSort(arr, pi+1, high)
+
+
+class StatisticsByMarketListView(FilteredStatisticsByMarketListView):
+    filterset_class = MarketStatisticsFilterSet
 
 
 class DishStatisticsView(views.DetailView):

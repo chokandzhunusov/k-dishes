@@ -24,6 +24,15 @@
     border: 1px solid black;
 }
 
+#statistics_by_market > a > button {
+    margin-top: 20px;
+    margin-left: 42%;
+    margin-bottom: 10px;
+    border-radius: 10%;
+    background-color: rgb(216, 216, 216);
+    border: 1px solid black;
+}
+
 #filters-form {
     display: flex;
     flex-direction: column;

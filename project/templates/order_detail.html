@@ -16,17 +16,29 @@
 
         <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Сумма: </b></span>
-            <span class="order-detail-table-items-2">{{totall_price_2}} c.</span>
+            <span class="order-detail-table-items-2">{{total_by_price_2}} c.</span>
         </div>
 
          <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b> ------: </b></span>
+            <span class="order-detail-table-items-2">{{total_by_price_1}} c.</span>
+         </div>
+
+         <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b> Разница: </b></span>
+            <span class="order-detail-table-items-2">{{diff_t_by_p1_t_by_p2}} c.</span>
+         </div>
+
+
+
+         <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Кол-во элементов: </b></span>
-            <span class="order-detail-table-items-2">{{filterset.qs | length}} шт.</span>
+            <span class="order-detail-table-items-2">{{dishes_quantity}} шт.</span>
         </div>
 
         <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Кол-во продукции: </b></span>
-            <span class="order-detail-table-items-2">{{totall_dishes}} шт.</span>
+            <span class="order-detail-table-items-2">{{total_dishes_quantity}} шт.</span>
         </div>
 
         <div class="order-detail-table-items">
