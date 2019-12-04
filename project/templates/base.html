@@ -40,31 +40,27 @@
     <div id="header">
         <div id="header-home">
             <a href="/">
-                <button style="border-radius: 10%">
+                <button style="border-radius: 10%;">
                     Главная
                 </button>
             </a>
             <a href="/statistics">
-                <button style="border-radius: 10%">
+                <button style="border-radius: 10%;">
                     Статистика
                 </button>
             </a>
             <a href="/statistics_by_market">
-                <button style="border-radius: 10%; width: 200px">
+                <button style="border-radius: 10%; width: 200px;">
                     Стат. по маркетам
                 </button>
             </a>
 
         </div>
-         <div id="header-form">
+        <div id="header-form">
              {% block form %}
             {% endblock form %}
         </div>
-        <!-- <div id="header-form">
-            <a href="/upload_file">
-                <button style="border-radius: 10%">Загрузить</button>
-            </a>
-        </div> -->
+
         {% if err_msg %}
         <div id="err_msg">
             <h5>{{err_msg}}</h5>

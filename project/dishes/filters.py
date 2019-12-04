@@ -299,7 +299,7 @@ class MarketStatisticsFilterSet(StatisticsFilterSet):
             for month in value:
                 try:
                     filtered_orders_by_month |= market.orders.filter(date__month=month)
-                    market.orders_count = filtered_orders_by_month.count()
+                    market.orders_count = len(filtered_orders_by_month)
                     market.orders_total_by_price_2 = 0
                     for order in filtered_orders_by_month:
                         market.orders_total_by_price_2 += order.total_by_price_2
