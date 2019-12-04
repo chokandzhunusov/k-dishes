@@ -279,9 +279,8 @@ class StatisticsFilterSet(django_filters.FilterSet):
 class MarketStatisticsFilterSet(StatisticsFilterSet):
 
     def filter_by_year(self, queryset, name, value):
-        filtered_orders_by_year = Order.objects.none()
-
         for market in queryset:
+            filtered_orders_by_year = Order.objects.none()
             for year in value:
                 filtered_orders_by_year |= market.order_set.all().filter(date__year=year)
                 market.orders_count = filtered_orders_by_year.count()
@@ -293,9 +292,9 @@ class MarketStatisticsFilterSet(StatisticsFilterSet):
         return queryset
 
     def filter_by_month(self, queryset, name, value):
-        filtered_orders_by_month = Order.objects.none()
 
         for market in queryset:
+            filtered_orders_by_month = Order.objects.none()
             for month in value:
                 try:
                     filtered_orders_by_month |= market.orders.filter(date__month=month)
