@@ -88,8 +88,8 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {"default": env.db("DATABASE_URL")}
-# DATABASE_URL=postgres://postgres@db:5432/k_dishes
+# DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASE_URL='postgres://postgres@db:5432/k_dishes'
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
