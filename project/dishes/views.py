@@ -1,8 +1,12 @@
 import re
+import json
 from datetime import datetime
 import datefinder
 from django.urls import reverse
 from django.shortcuts import redirect, render
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+
 
 import django.views.generic as views
 from django.http import QueryDict, HttpResponse
@@ -579,3 +583,35 @@ class UploadFileView(BaseView, views.FormView):
     form_class = UploadFileForm
     template_name = 'upload_file.html'
     success_url = '/'
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ApproveDish(views.View):
+    def post(self, request):
+        dishToApprove = Dish.objects.get(pk=request.POST.get('dishId'))
+        dishToApprove.approve = True
+        dishToApprove.save()
+        respose_data = {'status': 200, 'dishId': dishToApprove.pk}
+        return HttpResponse(json.dumps(respose_data), content_type="application/json")
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class CancelDish(views.View):
+    def post(self, request):
+        dishToCancel = Dish.objects.get(pk=request.POST.get('dishId'))
+        dishToCancel.cancel = True
+        dishToCancel.save()
+        respose_data = {'status': 200, 'dishId': dishToCancel.pk}
+        return HttpResponse(json.dumps(respose_data), content_type="application/json")
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class EditDish(views.View):
+    def post(self, request):
+        print('============>', type(request.POST.get('dishQuantity')))
+        dishToEdit = Dish.objects.get(pk=request.POST.get('dishId'))
+        dishToEdit.quantity = request.POST.get('dishQuantity')
+        dishToEdit.price_2 = request.POST.get('dishPrice2')
+        dishToEdit.save()
+        respose_data = {'status': 200, 'dishId': dishToEdit.pk}
+        return HttpResponse(json.dumps(respose_data), content_type="application/json")

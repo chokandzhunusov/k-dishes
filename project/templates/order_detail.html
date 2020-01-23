@@ -74,33 +74,59 @@
     <div id="order-detail-table-dish-header-divisor"></div>
 
     {% for dish in  filterset.qs %}
+        {% if not dish.cancel%}
+            <div class="order-detail-table-dish">
+                <a href="/dish/{{dish.pk}}" id="{{dish.pk}}">
+                    <div class="order-detail-table-dish-number">
+                        <span>{{dish.number}}</span>
+                    </div>
+                    <div class="order-detail-table-dish-bar-code">
+                        <span>{{dish.bar_code}}</span>
+                    </div>
+                    <div class="order-detail-table-dish-name">
+                        <span>{{dish.name}}</span>
+                    </div>
+                    <div class="order-detail-table-dish-quantity">
+                        <span>{{dish.quantity}}</span>
+                    </div>
+                    <div class="order-detail-table-dish-price_2">
+                        <span>{{dish.price_2}} c.</span>
+                    </div>
+                    <div class="order-detail-table-dish-price_2">
+                        <span>{% widthratio dish.price_2 1 dish.quantity %} c.</span>
+                    </div>
+                </a>
+                <div class="approve-dish" id="approve_{{dish.pk}}">
+                    {% if dish.approve %}
+                        <i class="fa fa-check" aria-hidden="true" style="opacity: 0.3"></i>
+                    {% else %}
+                        <i class="fa fa-check" aria-hidden="true"></i>
+                    {% endif %}
+                </div>
+                <div class="cancel-dish" id="cancel_{{dish.pk}}">
+                    <i class="fa fa-times" aria-hidden="true"></i>
+                </div>
+                <div class="edit-dish" id="edit_{{dish.pk}}">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </div>
+            </div>
 
-    <a href="/dish/{{dish.pk}}">
-        <div class="order-detail-table-dish">
-        <div class="order-detail-table-dish-number">
-            <span>{{dish.number}}</span>
-        </div>
-        <div class="order-detail-table-dish-bar-code">
-            <span>{{dish.bar_code}}</span>
-        </div>
-        <div class="order-detail-table-dish-name">
-            <span>{{dish.name}}</span>
-        </div>
-        <div class="order-detail-table-dish-quantity">
-            <span>{{dish.quantity}}</span>
-        </div>
-        <div class="order-detail-table-dish-price_2">
-            <span>{{dish.price_2}} c.</span>
-        </div>
-        <div class="order-detail-table-dish-price_2">
-            <span>{% widthratio dish.price_2 1 dish.quantity %} c.</span>
-        </div>
-    </div>
-    </a>
+            <div class="edit-dish-values" style="display: none;">
+                <div class="order-detail-table-dish-quantity-edit">
+                    <input type="text" name="quantity" style="height: 30px">
+                </div>
+                <div class="order-detail-table-dish-price_2-edit">
+                    <input type="text" name="price_2" style="height: 30px">
+                </div>
+                <div class="edit-dish-values-submit">
+                    Готово
+                </div>
+            </div>
 
 
 
-    <div class="order-detail-table-dish-divisor"></div>
+            <div class="order-detail-table-dish-divisor"></div>
+        {% endif %}
     {% endfor %}
 </div>
 

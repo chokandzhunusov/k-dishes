@@ -14,4 +14,7 @@ urlpatterns = [
     path('upload_file/', views.UploadFileView.as_view(), name='upload_file'),
     path('upload_dish_price/', views.UploadDishPriceView.as_view(), name='upload_dish_price'),
     path('create_markets/', views.CreateMarketsView.as_view(), name='create_markets'),
+    path('approve_dish/', views.ApproveDish.as_view(), name='approve_dish'),
+    path('cancel_dish/', views.CancelDish.as_view(), name='cancel_dish'),
+    path('edit_dish/', views.EditDish.as_view(), name='edit_dish'),
 ]
