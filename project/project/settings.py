@@ -91,6 +91,7 @@ WSGI_APPLICATION = 'project.wsgi.application'
 # DATABASES = {"default": env.db("DATABASE_URL")}
 DATABASE_URL='postgres://postgres@db:5432/k_dishes'
 
+
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
 

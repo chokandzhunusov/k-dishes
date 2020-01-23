@@ -52,6 +52,10 @@ class Dish(models.Model):
     price_1 = models.IntegerField(default=0)
     price_2 = models.IntegerField(default=0)
 
+    approve = models.BooleanField(default=False)
+    cancel = models.BooleanField(default=False)
+
+
     def __str__(self):
         return self.name
 
