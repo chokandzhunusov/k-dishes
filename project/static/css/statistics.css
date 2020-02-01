@@ -62,3 +62,28 @@
     display: flex;
     justify-content: center;
 }
+
+#statistics-order-detail-table-dish-header-name {
+    display: flex;
+    width: 30%;
+    align-items: center;
+}
+
+.statistics-order-detail-table-dish-number {
+    display: flex;
+    width: 6%;
+    align-items: center;
+    margin-left: 2%;
+}
+
+.statistics-order-detail-table-dish-bar-code {
+    display: flex;
+    width: 12%;
+    align-items: center;
+}
+
+.statistics-order-detail-table-dish-name {
+    display: flex;
+    width: 28%;
+    align-items: center;
+}

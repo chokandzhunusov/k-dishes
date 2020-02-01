@@ -152,19 +152,18 @@
 
 #main-content-phone-headers-buyer {
   display: flex;
-  width: 18%;
+  width: 10%;
   height: 20px;
   /*background-color: green;*/
-  margin-left: 5%;
+  margin-left: 1%;
   align-items: center;
 }
 
 .main-content-phone-headers-items {
   display: flex;
-  width: 18%;
+  width: 10%;
   height: 20px;
   /*background-color: green;*/
-  margin-left: 5%;
   align-items: center;
 }
 
@@ -192,20 +191,19 @@
 
 .home-group-table-content-items {
   display: flex;
-  width: 15%;
+  width: 12%;
   height: 20px;
   /*background-color: yellow;*/
   margin-top: 10px;
-  margin-left: 8.5%;
+  margin-left: 4%;
 }
 
 .home-group-table-content-items-aligned {
   display: flex;
-  width: 15%;
+  width: 10%;
   height: 20px;
   /*background-color: yellow;*/
   margin-top: 10px;
-  margin-left: 11%;
 }
 
 #home-group-table-content-footer-divisor {

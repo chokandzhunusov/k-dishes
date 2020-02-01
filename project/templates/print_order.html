@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% load l10n %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+
+<div id="order-detail-table">
+    <div id="order-detail-table-header">
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Маркет: </b></span>
+            <span class="order-detail-table-items-2">{{object.market.name}}</span>
+        </div>
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Дата: </b></span>
+            <span class="order-detail-table-items-2">{{object.date}}</span>
+        </div>
+
+        <div class="order-detail-table-items">
+            <span class="order-detail-table-items-1"><b>Поставщик: </b></span>
+            <span class="order-detail-table-items-2" id="order-detail-table-total-by-price-2">ЧП "Молдожанов К.Б."</span>
+        </div>
+
+    </div>
+
+    <div id="order-detail-table-buyer-name-divisor"></div>
+
+    <div id="print-order-detail-table-dish-header">
+        <div id="print-order-detail-table-dish-header-number">
+            <span>№</span>
+        </div>
+        <div id="order-detail-table-dish-header-code">
+            <span>Код</span>
+        </div>
+        <div id="print-order-detail-table-dish-header-bar-code">
+            <span>Штрихкод</span>
+        </div>
+        <div id="print-order-detail-table-dish-header-name">
+            <span>Продукция</span>
+        </div>
+        <div id="print-order-detail-table-dish-header-quantity">
+            <span>Заказ</span>
+        </div>
+        <div id="print-order-detail-table-dish-header-price_2">
+            <span>Цена</span>
+        </div>
+        <div id="print-order-detail-table-dish-header-total">
+            <span>Сумма</span>
+        </div>
+    </div>
+
+
+    {% for dish in  filterset.qs %}
+        {% if not dish.cancel%}
+            <span id="order-detail-table-dish-pirice-1" style="display: none;">{{dish.price_1}}</span>
+            <div class="print-order-detail-table-dish">
+                <a href="/dish/{{dish.pk}}" id="{{dish.pk}}">
+                    <div class="print-order-detail-table-dish-number">
+                        <span>{{dish.number}}</span>
+                    </div>
+                    <div class="print-order-detail-table-dish-code">
+                        <span>{{dish.code}}</span>
+                    </div>
+                    <div class="print-order-detail-table-dish-bar-code">
+                        <span>{{dish.bar_code}}</span>
+                    </div>
+                    <div class="print-order-detail-table-dish-name">
+                        <span>{{dish.name}}</span>
+                    </div>
+                    <div class="order-detail-table-dish-quantity">
+                        <span>{{dish.quantity}}</span>
+                    </div>
+                    <div class="print-order-detail-table-dish-price_2">
+                        <span>{{dish.price_2}} c.</span>
+                    </div>
+                    <div class="print-order-detail-table-dish-total">
+                        <span>{% widthratio dish.price_2 1 dish.quantity %} c.</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="print-order-detail-table-dish-divisor"></div>
+        {% endif %}
+    {% endfor %}
+
+    <div id="print-total-by-price-2">
+        Итого: <span style="margin-left: 5%"> {{total_by_price_2}} c. </span>
+    </div>
+
+    <div class="print-sign">
+        Отпустил(a)
+    </div>
+    <div class="print-sign">
+        Получил(a)
+    </div>
+</div>
+
+<script>
+    function toggleFilter() {
+        let filterBlockDisplay =  document.getElementById("order-detail-filter-form").style.display
+        if (filterBlockDisplay == 'none') {
+            document.getElementById("order-detail-filter-form").style.display = 'block';
+        } else {
+            document.getElementById("order-detail-filter-form").style.display = 'none';
+        }
+    }
+</script>
+
+{% endblock content %}

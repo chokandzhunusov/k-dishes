@@ -15,36 +15,41 @@
         </div>
 
         <div class="order-detail-table-items">
-            <span class="order-detail-table-items-1"><b>Сумма: </b></span>
-            <span class="order-detail-table-items-2">{{total_by_price_2}} c.</span>
+            <span class="order-detail-table-items-1"><b>Итог(продажа): </b></span>
+            <span class="order-detail-table-items-2" id="order-detail-table-total-by-price-2">{{total_by_price_2}} c.</span>
         </div>
 
          <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b> ------: </b></span>
-            <span class="order-detail-table-items-2">{{total_by_price_1}} c.</span>
+            <span class="order-detail-table-items-2" id="order-detail-table-total-by-price-1">{{total_by_price_1}} c.</span>
          </div>
 
          <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b> Разница: </b></span>
-            <span class="order-detail-table-items-2">{{diff_t_by_p1_t_by_p2}} c.</span>
+            <span class="order-detail-table-items-2" id="order-detail-table-diff">{{diff_t_by_p1_t_by_p2}} c.</span>
          </div>
 
 
 
          <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Кол-во элементов: </b></span>
-            <span class="order-detail-table-items-2">{{dishes_quantity}} шт.</span>
+            <span class="order-detail-table-items-2" id="order-detail-table-dishes-quantity">{{dishes_quantity}} шт.</span>
         </div>
 
         <div class="order-detail-table-items">
             <span class="order-detail-table-items-1"><b>Кол-во продукции: </b></span>
-            <span class="order-detail-table-items-2">{{total_dishes_quantity}} шт.</span>
+            <span class="order-detail-table-items-2" id="order-detail-table-total-dishes-quantity">{{total_dishes_quantity}} шт.</span>
         </div>
 
         <div class="order-detail-table-items">
             <a href="/order/{{object.slug}}/delete">
                 <div id="delete-btn">
                     Удалить
+                </div>
+            </a>
+            <a href="/order/{{object.slug}}/print">
+                <div id="print-btn">
+                    Печать
                 </div>
             </a>
         </div>
@@ -75,6 +80,7 @@
 
     {% for dish in  filterset.qs %}
         {% if not dish.cancel%}
+            <span id="order-detail-table-dish-pirice-1" style="display: none;">{{dish.price_1}}</span>
             <div class="order-detail-table-dish">
                 <a href="/dish/{{dish.pk}}" id="{{dish.pk}}">
                     <div class="order-detail-table-dish-number">
@@ -116,7 +122,7 @@
                     <input type="text" name="quantity" style="height: 30px">
                 </div>
                 <div class="order-detail-table-dish-price_2-edit">
-                    <input type="text" name="price_2" style="height: 30px">
+                    <input type="text" name="price_2" style="display: none">
                 </div>
                 <div class="edit-dish-values-submit">
                     Готово

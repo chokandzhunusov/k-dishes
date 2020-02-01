@@ -1,0 +1,136 @@
+#order-detail-table-dish-header-code {
+    display: flex;
+    width: 8%;
+    align-items: center;
+    /*background-color: coral;*/
+}
+
+#print-order-detail-table-dish-header-name {
+    display: flex;
+    width: 39%;
+    align-items: center;
+    /*background-color: green;*/
+}
+
+#print-order-detail-table-dish-header-total {
+    display: flex;
+    width: 6%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: blue;*/
+}
+
+#print-order-detail-table-dish-header-number {
+    display: flex;
+    width: 3%;
+    align-items: center;
+    margin-left: 2%;
+    /*background-color: floralwhite;*/
+}
+
+#print-order-detail-table-dish-header-bar-code {
+    display: flex;
+    width: 12%;
+    align-items: center;
+    /*background-color: coral;*/
+}
+
+#print-order-detail-table-dish-header-price_2 {
+    display: flex;
+    width: 6%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: blue;*/
+}
+
+#print-order-detail-table-dish-header-quantity {
+    display: flex;
+    width: 6%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: teal;*/
+}
+
+.print-order-detail-table-dish-number {
+    display: flex;
+    width: 3%;
+    align-items: center;
+    margin-left: 2%;
+    /*background-color: floralwhite;*/
+}
+
+.print-order-detail-table-dish-code {
+    display: flex;
+    width: 8%;
+    align-items: center;
+    /*background-color: coral;*/
+}
+
+.print-order-detail-table-dish-bar-code {
+    display: flex;
+    width: 20%;
+    align-items: center;
+    /*background-color: coral;*/
+}
+
+.print-order-detail-table-dish-name {
+    display: flex;
+    width: 45%;
+    align-items: center;
+    /*background-color: green;*/
+}
+
+.print-order-detail-table-dish-price_2 {
+    display: flex;
+    width: 7%;
+    align-items: center;
+    justify-content: center;
+    /*background-color: blue;*/
+}
+
+.print-order-detail-table-dish-total {
+    display: flex;
+    width: 7%;
+    align-items: center;
+    justify-content: center;
+}
+
+#print-order-detail-table-dish-header {
+    display: flex;
+    width: 77%;
+    margin-top: 5%;
+    margin-left: 20%;
+    height: 40px;
+    background-color: #FFB14B;
+}
+
+.print-order-detail-table-dish {
+    display: flex;
+    width: 90%;
+    margin-top: 10px;
+    margin-left: 20%;
+    height: 40px;
+}
+
+.print-order-detail-table-dish > a{
+    display: flex;
+    width: 70%;
+    height: 40px;
+    /*background-color: brown;*/
+}
+
+.print-order-detail-table-dish-divisor {
+    width: 70%;
+    margin-left: 20%;
+    border: 1px dashed #bbbbbb;
+}
+
+#print-total-by-price-2 {
+    display: flex;
+    margin-left: 75%;
+    margin-top: 2%;
+}
+
+.print-sign {
+    margin-left: 25%;
+}
