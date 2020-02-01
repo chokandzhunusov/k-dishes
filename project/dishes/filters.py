@@ -170,9 +170,10 @@ class StatisticsFilterSet(django_filters.FilterSet):
                 for u_dish in queryset:
                     try:
                         dish = order_dishes.get(code=u_dish.code)
-                        u_dish.quantity += dish.quantity
-                        u_dish.price_1_total += dish.price_1 * dish.quantity
-                        u_dish.price_2_total += dish.price_2 * dish.quantity
+                        if not dish.cancel:
+                            u_dish.quantity += dish.quantity
+                            u_dish.price_1_total += dish.price_1 * dish.quantity
+                            u_dish.price_2_total += dish.price_2 * dish.quantity
                     except Dish.DoesNotExist:
                         pass
 
@@ -198,9 +199,10 @@ class StatisticsFilterSet(django_filters.FilterSet):
                     for u_dish in queryset:
                         try:
                             dish = order_dishes.get(code=u_dish.code)
-                            u_dish.quantity += dish.quantity
-                            u_dish.price_1_total += dish.price_1 * dish.quantity
-                            u_dish.price_2_total += dish.price_2 * dish.quantity
+                            if not dish.cancel:
+                                u_dish.quantity += dish.quantity
+                                u_dish.price_1_total += dish.price_1 * dish.quantity
+                                u_dish.price_2_total += dish.price_2 * dish.quantity
                         except Dish.DoesNotExist:
                             pass
         else:
@@ -213,9 +215,10 @@ class StatisticsFilterSet(django_filters.FilterSet):
                         for u_dish in queryset:
                             try:
                                 dish = order_dishes.get(code=u_dish.code)
-                                u_dish.quantity += dish.quantity
-                                u_dish.price_1_total += dish.price_1 * dish.quantity
-                                u_dish.price_2_total += dish.price_2 * dish.quantity
+                                if not dish.cancel:
+                                    u_dish.quantity += dish.quantity
+                                    u_dish.price_1_total += dish.price_1 * dish.quantity
+                                    u_dish.price_2_total += dish.price_2 * dish.quantity
                             except Dish.DoesNotExist:
                                 pass
         self.req_session['order_ids'] = self.order_ids
@@ -235,9 +238,10 @@ class StatisticsFilterSet(django_filters.FilterSet):
                     for u_dish in queryset:
                         try:
                             dish = order_dishes.get(code=u_dish.code)
-                            u_dish.quantity += dish.quantity
-                            u_dish.price_1_total += dish.price_1 * dish.quantity
-                            u_dish.price_2_total += dish.price_2 * dish.quantity
+                            if not dish.cancel:
+                                u_dish.quantity += dish.quantity
+                                u_dish.price_1_total += dish.price_1 * dish.quantity
+                                u_dish.price_2_total += dish.price_2 * dish.quantity
                         except Dish.DoesNotExist:
                             pass
 
@@ -253,9 +257,10 @@ class StatisticsFilterSet(django_filters.FilterSet):
                     for u_dish in queryset:
                         try:
                             dish = order_dishes.get(code=u_dish.code)
-                            u_dish.quantity += dish.quantity
-                            u_dish.price_1_total += dish.price_1 * dish.quantity
-                            u_dish.price_2_total += dish.price_2 * dish.quantity
+                            if not dish.cancel:
+                                u_dish.quantity += dish.quantity
+                                u_dish.price_1_total += dish.price_1 * dish.quantity
+                                u_dish.price_2_total += dish.price_2 * dish.quantity
                         except Dish.DoesNotExist:
                             pass
         else:
@@ -267,9 +272,10 @@ class StatisticsFilterSet(django_filters.FilterSet):
                         for u_dish in queryset:
                             try:
                                 dish = order_dishes.get(code=u_dish.code)
-                                u_dish.quantity += dish.quantity
-                                u_dish.price_1_total += dish.price_1 * dish.quantity
-                                u_dish.price_2_total += dish.price_2 * dish.quantity
+                                if not dish.cancel:
+                                    u_dish.quantity += dish.quantity
+                                    u_dish.price_1_total += dish.price_1 * dish.quantity
+                                    u_dish.price_2_total += dish.price_2 * dish.quantity
                             except Dish.DoesNotExist:
                                 pass
         self.req_session['order_ids'] = self.order_ids

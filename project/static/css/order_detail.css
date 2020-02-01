@@ -104,6 +104,17 @@
     background-color: rgb(216, 216, 216);
 }
 
+#print-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    border-radius: 10%;
+    background-color: rgb(216, 216, 216);
+    margin-left: 20px;
+}
+
 
 #order-detail-table-buyer-name-divisor {
     width: 30%;
@@ -202,7 +213,6 @@
     align-items: center;
     margin-left: 2%;
     /*background-color: floralwhite;*/
-
 }
 
 .order-detail-table-dish-bar-code {
@@ -299,4 +309,11 @@
     justify-content: center;
     border: 1px solid #bbbbbb;
     background-color: lawngreen;
+}
+
+
+.statistics-by-market-order-detail-table-dish-name {
+    display: flex;
+    width: 16%;
+    align-items: center;
 }

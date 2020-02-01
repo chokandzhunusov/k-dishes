@@ -31,7 +31,13 @@
             <h4>Покупатель</h4>
         </div>
         <div class="main-content-phone-headers-items">
-            <h5>Сумма (общая по продажной цене):</h5>
+            <h5>Сумма (покупочная):</h5>
+        </div>
+        <div class="main-content-phone-headers-items">
+            <h5>Сумма (продажная):</h5>
+        </div>
+        <div class="main-content-phone-headers-items">
+            <h5>Разница:</h5>
         </div>
         <div class="main-content-phone-headers-items">
             <h5>Кол-во элементов</h5>
@@ -50,7 +56,13 @@
                 {{order.market}}
             </div>
             <div class="home-group-table-content-items-aligned">
+                {{order.total_by_price_1}} c.
+            </div>
+            <div class="home-group-table-content-items-aligned">
                 {{order.total_by_price_2}} c.
+            </div>
+            <div class="home-group-table-content-items-aligned">
+                {{order.diff}} c.
             </div>
             <div class="home-group-table-content-items-aligned">
                 {{order.dishes_quantity}}

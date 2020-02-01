@@ -346,6 +346,8 @@ class HomeListView(views.ListView, BaseView):
         except KeyError:
             pass
 
+        for order in context['object_list']:
+            order.diff = order.total_by_price_2 - order.total_by_price_1
         return context
 
 
@@ -386,6 +388,11 @@ class OrderDeleteView(views.DeleteView):
     model = Order
     template_name = 'delete_order.html'
     success_url = '/'
+
+
+class OrderPrintView(FilteredOrderDetailView):
+    template_name = 'print_order.html'
+    filterset_class = MarketDetailFilterSet
 
 
 class DishDetailView(views.DetailView, BaseView):
@@ -601,6 +608,14 @@ class CancelDish(views.View):
         dishToCancel = Dish.objects.get(pk=request.POST.get('dishId'))
         dishToCancel.cancel = True
         dishToCancel.save()
+
+        order = Order.objects.get(pk=dishToCancel.order.pk)
+        order.dishes_quantity -= 1
+        order.total_dishes_quantity -= dishToCancel.quantity
+        order.total_by_price_1 -= dishToCancel.price_1 * dishToCancel.quantity
+        order.total_by_price_2 -= dishToCancel.price_2 * dishToCancel.quantity
+        order.save()
+
         respose_data = {'status': 200, 'dishId': dishToCancel.pk}
         return HttpResponse(json.dumps(respose_data), content_type="application/json")
 
@@ -608,10 +623,22 @@ class CancelDish(views.View):
 @method_decorator(csrf_exempt, name='dispatch')
 class EditDish(views.View):
     def post(self, request):
-        print('============>', type(request.POST.get('dishQuantity')))
         dishToEdit = Dish.objects.get(pk=request.POST.get('dishId'))
+        prevQuantity = dishToEdit.quantity
+
         dishToEdit.quantity = request.POST.get('dishQuantity')
-        dishToEdit.price_2 = request.POST.get('dishPrice2')
         dishToEdit.save()
+        print(prevQuantity, dishToEdit.quantity)
+
+        order = Order.objects.get(pk=dishToEdit.order.pk)
+        print(order.total_dishes_quantity, order.total_by_price_1, order.total_by_price_2)
+        order.total_dishes_quantity -= prevQuantity
+        order.total_dishes_quantity += int(dishToEdit.quantity)
+        order.total_by_price_1 -= int(dishToEdit.price_1) * prevQuantity
+        order.total_by_price_1 += int(dishToEdit.price_1) * int(dishToEdit.quantity)
+        order.total_by_price_2 -= int(dishToEdit.price_2) * prevQuantity
+        order.total_by_price_2 += int(dishToEdit.price_2) * int(dishToEdit.quantity)
+        order.save()
+
         respose_data = {'status': 200, 'dishId': dishToEdit.pk}
         return HttpResponse(json.dumps(respose_data), content_type="application/json")

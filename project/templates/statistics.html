@@ -13,11 +13,11 @@
             <span class="order-detail-table-items-2">{{total_amount_of_dish}} шт.</span>
         </div>
         <div class="order-detail-table-items">
-            <span class="order-detail-table-items-1"><b>Сумма (общая по покупочной цене): </b></span>
+            <span class="order-detail-table-items-1"><b>Итог (общая по покупочной цене): </b></span>
             <span class="order-detail-table-items-2">{{total_dish_price_1}} c.</span>
         </div>
         <div class="order-detail-table-items">
-            <span class="order-detail-table-items-1"><b>Сумма (общая по продажной цене): </b></span>
+            <span class="order-detail-table-items-1"><b>Итог (общая по продажной цене): </b></span>
             <span class="order-detail-table-items-2">{{total_dish_price_2}} c.</span>
         </div>
     </div>
@@ -49,7 +49,7 @@
         <div id="order-detail-table-dish-header-bar-code">
             <span>Штрихкод</span>
         </div>
-        <div id="order-detail-table-dish-header-name">
+        <div id="statistics-order-detail-table-dish-header-name">
             <span>Продукция</span>
         </div>
         <div id="order-detail-table-dish-header-quantity">
@@ -69,13 +69,13 @@
 
             <a href="/statistics/{{dish.pk}}">
                 <div class="order-detail-table-dish">
-                <div class="order-detail-table-dish-number">
+                <div class="statistics-order-detail-table-dish-number">
                     <span>{{forloop.counter}}</span>
                 </div>
-                <div class="order-detail-table-dish-bar-code">
+                <div class="statistics-order-detail-table-dish-bar-code">
                     <span>{{dish.bar_code}}</span>
                 </div>
-                <div class="order-detail-table-dish-name">
+                <div class="statistics-order-detail-table-dish-name">
                     <span>{{dish.name}}</span>
                 </div>
                 <div class="order-detail-table-dish-quantity">

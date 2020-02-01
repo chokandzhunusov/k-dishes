@@ -66,18 +66,41 @@ $( ".cancel-dish" ).on( "click", function() {
             'slug': slug,
         },
         success : function(data) {
-            console.log('Success', data.dishId)
             $("#" + "cancel_"+ dishId).css('display', 'none')
             $("#" + "cancel_"+ dishId).prev().css('display', 'none')
             $("#" + "cancel_"+ dishId).prev().prev().css('display', 'none')
             $("#" + "cancel_"+ dishId).prev().prev().prev().css('display', 'none')
             $("#" + "cancel_"+ dishId).next().css('display', 'none')
+
         },
         error : function(request,error)
         {
             console.log(error)
         }
     });
+
+    var quantity = parseInt($("#order-detail-table-dishes-quantity").text().split(' ')[0]) - 1
+    $("#order-detail-table-dishes-quantity").text(quantity.toString() + ' шт.')
+
+    var quantityForTotal = $(this).parent().children('a')
+        .children('.order-detail-table-dish-quantity')
+        .children().text().split(' ')[0]
+    var quantityForTotalFinal =  parseInt($("#order-detail-table-total-dishes-quantity").text().split(' ')[0]) - parseInt(quantityForTotal)
+    $("#order-detail-table-total-dishes-quantity").text(quantityForTotalFinal.toString() + 'шт.')
+
+    var total_by_price_2 = $(this).parent().children('a')
+        .children('.order-detail-table-dish-price_2').last()
+        .children().text().split(' ')[0]
+    var totalByPrice2Final = parseInt($("#order-detail-table-total-by-price-2").text().split(' ')[0]) - parseInt(total_by_price_2)
+    $("#order-detail-table-total-by-price-2").text(totalByPrice2Final)
+
+    var total_by_price_1 = parseInt($("#order-detail-table-dish-pirice-1").text()) * parseInt(quantityForTotal)
+    var totalByPrice1Final = parseInt($("#order-detail-table-total-by-price-1").text().split(' ')[0]) - parseInt(total_by_price_1)
+    $("#order-detail-table-total-by-price-1").text(totalByPrice1Final)
+
+    var diff = totalByPrice2Final - totalByPrice1Final
+    $("#order-detail-table-diff").text(diff)
+
 });
 
 
@@ -98,6 +121,7 @@ $( ".edit-dish-values-submit" ).on( "click", function() {
     var slug = extractSlug(window.location.href)
     var dishQuantity = $(this).prev().prev().children().val()
     var dishPrice2 = $(this).prev().children().val()
+    var dishPrice1 = $(this).parent().prev().prev().text()
 
     if (!dishQuantity) {
         dishQuantity = $(this).parent().prev().children('a')
@@ -131,6 +155,22 @@ $( ".edit-dish-values-submit" ).on( "click", function() {
         }
     });
 
+    var totalByPrice2Final = parseInt($("#order-detail-table-total-by-price-2").text().split(' ')[0])
+    var quantityForTotal = $(this).parent().prev().children('a')
+        .children('.order-detail-table-dish-quantity')
+        .children().text().split(' ')[0]
+    var finTotalByPrice2 = totalByPrice2Final - parseInt(quantityForTotal) * dishPrice2
+
+    var totalByPrice1Final = parseInt($("#order-detail-table-total-by-price-1").text().split(' ')[0])
+    var finTotalByPrice1 = totalByPrice1Final - parseInt(quantityForTotal) * dishPrice1
+
+
+    var quantityForTotalFinal =  parseInt($("#order-detail-table-total-dishes-quantity").text().split(' ')[0]) - parseInt(quantityForTotal)
+    console.log(quantityForTotalFinal, '******')
+
+    $("#order-detail-table-total-dishes-quantity").text((quantityForTotalFinal + parseInt(dishQuantity)).toString() + 'шт.')
+
+
     $(this).parent().css('display', 'none')
     $(this).parent().prev().children('a')
         .children('.order-detail-table-dish-quantity')
@@ -141,6 +181,18 @@ $( ".edit-dish-values-submit" ).on( "click", function() {
     $(this).parent().prev().children('a')
         .children('.order-detail-table-dish-price_2')
         .children().last().text(total)
+
+    var quantityForTotalNew = $(this).parent().prev().children('a')
+        .children('.order-detail-table-dish-quantity')
+        .children().text().split(' ')[0]
+    var result = finTotalByPrice2 + parseInt(quantityForTotalNew) * dishPrice2
+    var result1 = finTotalByPrice1 + parseInt(quantityForTotalNew) * dishPrice1
+
+    $("#order-detail-table-total-by-price-2").text(result.toString() + ' c.')
+    $("#order-detail-table-total-by-price-1").text(result1.toString() + ' c.')
+    var diff = result - result1
+    $("#order-detail-table-diff").text(diff)
+
 });
 
 

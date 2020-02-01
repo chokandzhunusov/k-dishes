@@ -10,6 +10,10 @@ class Market(models.Model):
     # orders_total_by_price_1 = models.IntegerField(default=0)
     # orders_total_by_price_2 = models.IntegerField(default=0)
 
+    class Meta:
+        verbose_name = 'Гипермаркет'
+        verbose_name_plural = 'Гипермаркеты'
+
     def __str__(self):
         return self.name
 
@@ -27,6 +31,8 @@ class Order(models.Model):
 
     class Meta:
         ordering = ['-created']
+        verbose_name = 'Заявка'
+        verbose_name_plural = 'Заявки'
 
     def save(self, *args, **kwargs):
         slug_name = str(self.market) + '-' + str(self.date) + \
@@ -78,6 +84,8 @@ class UniqueDish(models.Model):
 
     class Meta:
         ordering = ['pk']
+        verbose_name = 'Товар'
+        verbose_name_plural = 'Товары'
 
     def __str__(self):
         return self.name
