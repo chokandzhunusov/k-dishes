@@ -1,3 +1,26 @@
+#print-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+.print-title-div {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.print-title-name {
+    font-size: 22px;
+}
+
+.title-btn {
+    margin-left: 20px;
+}
+
+
 #order-detail-table-dish-header-code {
     display: flex;
     width: 8%;
@@ -90,7 +113,7 @@
 
 .print-order-detail-table-dish-total {
     display: flex;
-    width: 7%;
+    width: 8%;
     align-items: center;
     justify-content: center;
 }

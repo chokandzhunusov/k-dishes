@@ -6,10 +6,26 @@
 
 {% block content %}
 
+<div id="print-title">
+    <div class="print-title-div" id="print-title-div-1">
+        <div class="print-title-name" id="print-title-1-name">
+            <b>СЧЕТ-ФАКТУРА</b>
+        </div>
+        <button class="title-btn" id="remove-title-1-btn"> УБРАТЬ </button>
+    </div>
+
+    <div class="print-title-div" id="print-title-div-2">
+        <div class="print-title-name" id="print-title-2-name">
+            <b>НАКЛАДНАЯ</b>
+        </div>
+        <button class="title-btn" id="remove-title-2-btn"> УБРАТЬ </button>
+    </div>
+</div>
+
 <div id="order-detail-table">
     <div id="order-detail-table-header">
         <div class="order-detail-table-items">
-            <span class="order-detail-table-items-1"><b>Маркет: </b></span>
+            <span class="order-detail-table-items-1"><b>Покупатель: ЗАО "Партнер Кей Джи" </b></span>
             <span class="order-detail-table-items-2">{{object.market.name}}</span>
         </div>
         <div class="order-detail-table-items">
@@ -85,14 +101,14 @@
     {% endfor %}
 
     <div id="print-total-by-price-2">
-        Итого: <span style="margin-left: 5%"> {{total_by_price_2}} c. </span>
+        <b>Итого:</b> <span style="margin-left: 5%"> {{total_by_price_2}} c. </span>
     </div>
 
     <div class="print-sign">
-        Отпустил(a)
+        <b>Отпустил(a) ____________________________________________</b>
     </div>
-    <div class="print-sign">
-        Получил(a)
+    <div class="print-sign" style="margin-top: 30px">
+        <b>Получил(a)  ____________________________________________</b>
     </div>
 </div>
 
