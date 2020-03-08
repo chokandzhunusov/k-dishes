@@ -34,7 +34,7 @@ $( ".approve-dish" ).on( "click", function() {
 
     $.ajax({
 
-        url : 'http://localhost:8000/approve_dish/',
+        url : 'http://206.189.178.220:8001/approve_dish/',
         type : 'POST',
         data : {
             'dishId': dishId,
@@ -59,7 +59,7 @@ $( ".cancel-dish" ).on( "click", function() {
 
     $.ajax({
 
-        url : 'http://localhost:8000/cancel_dish/',
+        url : 'http://206.189.178.220:8001/cancel_dish/',
         type : 'POST',
         data : {
             'dishId': dishId,
@@ -138,7 +138,7 @@ $( ".edit-dish-values-submit" ).on( "click", function() {
     var total = parseInt(dishQuantity) * parseInt(dishPrice2)
 
     $.ajax({
-        url : 'http://localhost:8000/edit_dish/',
+        url : 'http://206.189.178.220:8001/edit_dish/',
         type : 'POST',
         data : {
             'dishId': dishId,
