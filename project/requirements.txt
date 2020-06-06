@@ -1,5 +1,5 @@
 datefinder==0.7.0
-Django==2.2.6
+Django==2.2.13
 django-bootstrap-form==3.4
 django-environ==0.4.5
 django-excel==0.0.10
